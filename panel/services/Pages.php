@@ -35,7 +35,8 @@ $pages = array(
             new PageReference('Warga Negara', 'statistik-penduduk/warga-negara.php', 'far fa-circle nav-icon'),
         )
     ),
-    new PageReference('Laporan Bulanan', 'laporan-bulanan/laporan-bulanan.php', 'fas fa-file-medical-alt nav-icon')
+    new PageReference('Laporan Bulanan', 'laporan-bulanan/laporan-bulanan.php', 'fas fa-file-medical-alt nav-icon'),
+    new PageReference('Account Profile', 'profile/profile.php', null)
 );
 
 function printPages($pages) {
