@@ -23,6 +23,7 @@ $pages = array(
             new PageReference('Daftar Keluarga', 'kependudukan/daftar-keluarga.php', 'fas fa-users nav-icon')
         )
     ),
+    new PageReference('History Aktivitas', 'history-aktifitas/history-aktifitas.php', 'nav-icon fas fa-history'),
     new PageReferenceComposite('Statistik', 'nav-icon fas fa-chart-line',
         array(
             new PageReference('Umur', 'statistik-penduduk/umur.php', 'far fa-circle nav-icon'),
@@ -36,7 +37,6 @@ $pages = array(
         )
     ),
     new PageReference('Laporan Bulanan', 'laporan-bulanan/laporan-bulanan.php', 'fas fa-file-medical-alt nav-icon'),
-    new PageReference('Account Profile', 'profile/profile.php', null)
 );
 
 function printPages($pages) {
