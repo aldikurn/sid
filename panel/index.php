@@ -127,7 +127,7 @@ function printSideBarMenu($pages)
                     <!-- The user image in the navbar-->
                     <i class="user-image fas fa-user-circle"></i>
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                    <span class="hidden-xs">Administrator</span>
+                    <span class="hidden-xs">Admin</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="list-group">
