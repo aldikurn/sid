@@ -26,6 +26,9 @@ function searchPage($pages) {
         }
     endforeach;
 }
+
+$index_location = dirname(substr_replace($_SERVER['PHP_SELF'], 'localhost', 0, 0));
+
 ?>
 <html lang="en">
 
@@ -38,6 +41,7 @@ function searchPage($pages) {
     <link rel="stylesheet" href="../dependencies/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../dependencies/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../dependencies/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../dependencies/plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="../dependencies/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
