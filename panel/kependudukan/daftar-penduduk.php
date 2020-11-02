@@ -2,8 +2,29 @@
     <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <button class="btn btn-success"><i class="fas fa-plus-circle"></i> Tambah data penduduk</button>
-            </div>
+                    <button type="button" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalTambahPenduduk" class="btn btn-success"><i class="fas fa-plus-circle"></i> Tambah data penduduk</button>
+                    <div class="modal fade" id="modalTambahPenduduk">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+<!--                                <div class="overlay d-flex justify-content-center align-items-center">-->
+<!--                                    <i class="fas fa-2x fa-sync fa-spin"></i>-->
+<!--                                </div>-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modal Heading</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    Modal body..
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-times"></i> Batal</button>
+                                    <button type="button" class="btn btn-primary" ><i class="fas fa-save"></i> Simpan</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="example" class="table table-bordered table-hover">
@@ -23,6 +44,23 @@
 </div><!-- /.row -->
 
 
+<script>
+    function simpanDataPenduduk() {
+        const ajax = new XMLHttpRequest();
+        ajax.onload = function () {
+            if(ajax.status === 200) {
+
+                $('#modalTambahPenduduk').modal('hide');
+            } else {
+
+            }
+        };
+        ajax.open("POST", "http://<?= $index_location ?>/services/ajax/simpanDataPenduduk.php");
+    }
+
+</script>
+
+<!--DataTables-->
 <script>
     function format(d) {
         return '<div class="dt-row-detail">' +
