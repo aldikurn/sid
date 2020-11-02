@@ -48,8 +48,6 @@ function searchPage($pages) {
     <script src="../dependencies/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../dependencies/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="../dependencies/dist/js/adminlte.min.js"></script>
-    <script src="../dependencies/plugins/chart.js/Chart.min.js"></script>
-    <script src="../dependencies/dist/js/pages/dashboard2.js"></script>
 </head>
 
 <?php
