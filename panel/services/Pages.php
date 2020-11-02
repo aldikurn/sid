@@ -32,8 +32,7 @@ $pages = array(
             new PageReference('Status Perkawinan', 'statistik-penduduk/status-perkawinan.php', 'far fa-circle nav-icon'),
             new PageReference('Agama', 'statistik-penduduk/agama.php', 'far fa-circle nav-icon'),
             new PageReference('Jenis Kelamin', 'statistik-penduduk/jenis-kelamin.php', 'far fa-circle nav-icon'),
-            new PageReference('Hubungan dalam KK', 'statistik-penduduk/hubungan-dalam-kk.php', 'far fa-circle nav-icon'),
-            new PageReference('Warga Negara', 'statistik-penduduk/warga-negara.php', 'far fa-circle nav-icon'),
+            new PageReference('Hubungan dalam KK', 'statistik-penduduk/hubungan-dalam-kk.php', 'far fa-circle nav-icon')
         )
     ),
     new PageReference('Laporan Bulanan', 'laporan-bulanan/laporan-bulanan.php', 'fas fa-file-medical-alt nav-icon'),
