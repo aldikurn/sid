@@ -199,15 +199,12 @@
 <script src="../dependencies/plugins/highcharts/highcharts.js"></script>
 <script src="../dependencies/plugins/highcharts/modules/data.js"></script>
 
-<?php
-$loc = dirname(substr_replace($_SERVER['PHP_SELF'], 'localhost', 0, 0));
-?>
 
 <script>
     Highcharts.chart('container', {
 
         data: {
-            csvURL: 'http://<?= $loc; ?>/services/api/getCovidStatisticDashboard.php',
+            csvURL: 'http://<?= $index_location; ?>/services/api/getCovidStatisticDashboard.php',
             beforeParse: function (csv) {
                 return csv.replace(/\n\n/g, '\n');
             }
