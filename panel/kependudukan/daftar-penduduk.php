@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-12">
-        <div class="card">
-            <!-- <div class="card-header">
-      <h3 class="card-title">Daftar Penduduk</h3>
-    </div> -->
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-success"><i class="fas fa-plus-circle"></i> Tambah data penduduk</button>
+            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="example" class="table table-bordered table-hover">
@@ -26,8 +26,8 @@
 <script>
     function format(d) {
         return '<div class="dt-row-detail">' +
-            '<button type="button" class="dt-btn-row-detail btn btn-warning">Edit</button>' +
-            '<button type="button" class="dt-btn-row-detail btn btn-danger">Delete</button></div>';
+            '<button type="button" class="dt-btn-row-detail btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</button>' +
+            '<button type="button" class="dt-btn-row-detail btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button></div>';
 
     }
 
