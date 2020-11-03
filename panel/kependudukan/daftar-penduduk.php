@@ -461,7 +461,7 @@
     function format(d) {
         return '<div class="dt-row-detail">' +
             '<button type="button" data-nik="' + d.nik +'" class="dt-btn-row-detail btn btn-sm btn-warning"><i class="fas fa-edit"></i> Batal</button>' +
-            '<button type="button" data-nik=" + d.nik + " class="dt-btn-row-detail btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</button></div>';
+            '<button type="button" data-nik=" '+ d.nik + '" class="dt-btn-row-detail btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</button></div>';
 
     }
 
