@@ -1,8 +1,8 @@
 <?php
 require_once('../DatabaseHelper.php');
 
-$table = 'test';
-$primaryKey = 'id';
+$table = 'view_penduduk';
+$primaryKey = 'nik';
 
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -10,7 +10,7 @@ $primaryKey = 'id';
 // parameter names
 $columns = array(
     array(
-        'db' => 'id',
+        'db' => 'nik',
         'dt' => 'DT_RowId',
         'formatter' => function ($d, $row) {
             // Technically a DOM id cannot start with an integer, so we prefix
@@ -19,10 +19,24 @@ $columns = array(
             return 'row_' . $d;
         }
     ),
-    array('db' => 'first_name', 'dt' => 'first_name'),
-    array('db' => 'last_name',  'dt' => 'last_name'),
-    array('db' => 'address',   'dt' => 'address'),
-    array('db' => 'phone',     'dt' => 'phone')
+    array('db' => 'nik', 'dt' => 'nik'),
+    array('db' => 'nomor_kk',  'dt' => 'nomor_kk'),
+    array('db' => 'nama',   'dt' => 'nama'),
+    array('db' => 'jenis_kelamin',     'dt' => 'jenis_kelamin'),
+    array('db' => 'tanggal_lahir',   'dt' => 'tanggal_lahir'),
+    array('db' => 'tempat_lahir',   'dt' => 'tempat_lahir'),
+    array('db' => 'hubungan_dalam_keluarga',   'dt' => 'hubungan_dalam_keluarga'),
+    array('db' => 'agama',   'dt' => 'agama'),
+    array('db' => 'pendidikan_terakhir',   'dt' => 'pendidikan_terakhir'),
+    array('db' => 'pekerjaan',   'dt' => 'pekerjaan'),
+    array('db' => 'status_perkawinan',   'dt' => 'status_perkawinan'),
+    array('db' => 'nik_ayah',   'dt' => 'nik_ayah'),
+    array('db' => 'nama_ayah',   'dt' => 'nama_ayah'),
+    array('db' => 'nik_ibu',   'dt' => 'nik_ibu'),
+    array('db' => 'nama_ibu',   'dt' => 'nama_ibu'),
+    array('db' => 'rt',   'dt' => 'rt'),
+    array('db' => 'rw',   'dt' => 'rw'),
+    array('db' => 'dusun',   'dt' => 'dusun')
 );
 
 $sql_details = array(
