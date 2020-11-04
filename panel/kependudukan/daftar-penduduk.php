@@ -391,7 +391,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                 rwSelect.add(opt);
             }
         }
-        const evt = new Event('change');
+        let evt = new Event('change');
         rwSelect.dispatchEvent(evt);
     });
     let evt = new Event('change');
@@ -448,7 +448,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                             if(response.status === 0) {
                                 document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
                                 $('#modalTambahDataPenduduk').modal('hide');
-                                toastr.success('Berhasil menambahkan data penduduk <br>' + ajax.responseText);
+                                toastr.success('Berhasil menambahkan data penduduk');
                                 let table = $('#tabel-penduduk').DataTable();
                                 table.destroy();
                                 refreshTablePenduduk();
