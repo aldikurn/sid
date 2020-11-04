@@ -69,6 +69,7 @@ $rw = array();
 foreach($result as $row) {
     $rw[] = array(
         'id' => $row['id'],
+        'id_dusun' => $row['id_dusun'],
         'nomor' => $row['nomor']
     );
 }
@@ -78,20 +79,7 @@ $rt = array();
 foreach($result as $row) {
     $rt[] = array(
         'id' => $row['id'],
+        'id_rw' => $row['id_rw'],
         'nomor' => $row['nomor']
     );
-}
-
-
-
-
-
-echo json_encode($jenis_kelamin) . '<br><br>';
-echo json_encode($hubungan_dalam_keluarga) . '<br><br>';
-echo json_encode($agama) . '<br><br>';
-echo json_encode($pendidikan_terakhir) . '<br><br>';
-echo json_encode($pekerjaan) . '<br><br>';
-echo json_encode($status_perkawinan) . '<br><br>';
-echo json_encode($dusun) . '<br><br>';
-echo json_encode($rw) . '<br><br>';
-echo json_encode($rt) . '<br><br>';
+};
