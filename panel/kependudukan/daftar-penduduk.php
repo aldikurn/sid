@@ -346,6 +346,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                         <th>Dusun</th>
                         <th>RW</th>
                         <th>RT</th>
+                        <th>Tanggal Rekam</th>
                     </tr>
                     </thead>
                 </table>
@@ -621,6 +622,9 @@ include_once ('services/getRequiredFormPenduduk.php');
                 },
                 {
                     "data": "dusun"
+                },
+                {
+                    "data": "tanggal_rekam"
                 }
 
             ],
