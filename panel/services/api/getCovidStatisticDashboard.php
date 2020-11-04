@@ -13,9 +13,9 @@ $newData = array();
 foreach ($data as $key => $value) :
     array_push($newData, array(
         'date' => date('Y-m-d', strtotime($value->key_as_string)),
-        'meninggal' => $value->jumlah_meninggal->value,
-        'positif' => $value->jumlah_positif->value,
-        'sembuh' => $value->jumlah_sembuh->value
+        'Meninggal' => $value->jumlah_meninggal->value,
+        'Positif' => $value->jumlah_positif->value,
+        'Sembuh' => $value->jumlah_sembuh->value
 
     ));
 endforeach;
