@@ -36,7 +36,8 @@ $columns = array(
     array('db' => 'nama_ibu',   'dt' => 'nama_ibu'),
     array('db' => 'rt',   'dt' => 'rt'),
     array('db' => 'rw',   'dt' => 'rw'),
-    array('db' => 'dusun',   'dt' => 'dusun')
+    array('db' => 'dusun',   'dt' => 'dusun'),
+    array('db' => 'tanggal_rekam',   'dt' => 'tanggal_rekam')
 );
 
 $sql_details = array(
