@@ -1,7 +1,18 @@
+<?php
+include_once ('services/getRequiredFormPenduduk.php');
+?>
+<script>
+    const rw_data = JSON.parse('<?= json_encode($rw) ?>');
+    const rt_data = JSON.parse('<?= json_encode($rt) ?>');
+</script>
+
+
+
 <style>
     #modal-body-tambah-data-penduduk {
         display: grid;
         grid-template-areas:
+            'info-form info-form info-form info-form info-form info-form '
             'preview-foto preview-foto fg-input-foto fg-input-foto fg-input-foto fg-input-foto'
             'preview-foto preview-foto fg-nama fg-nama fg-nama fg-nama'
             'preview-foto preview-foto fg-nik fg-nik fg-nik fg-nik'
@@ -17,6 +28,10 @@
 
     tr > * {
         text-align: center;
+    }
+
+    .info-form {
+        font-style: italic;
     }
 
     #preview-foto {
@@ -153,171 +168,160 @@
 </style>
 <div class="row">
     <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <button type="button" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalTambahDataPenduduk" class="btn btn-success"><i class="fas fa-plus-circle"></i> Tambah data penduduk</button>
-                    <form method="post" id="formTambahDataPenduduk">
-                        <div class="modal fade" id="modalTambahDataPenduduk">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Tambah data penduduk</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="card">
+            <div class="card-header">
+                <button type="button" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="showForm('insert')" class="btn btn-success"><i class="fas fa-plus-circle"></i> Tambah data penduduk</button>
+                <form method="post" id="formTambahDataPenduduk">
+                    <div class="modal fade" id="modalTambahDataPenduduk">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Tambah data penduduk</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div id="modal-body-tambah-data-penduduk" class="modal-body">
+                                    <p class="info-form">(*) Wajib diisi</p>
+                                    <div id="preview-foto">
+                                        <span id="placeholder-foto">3 X 4</span>
                                     </div>
-                                    <div id="modal-body-tambah-data-penduduk" class="modal-body">
-                                        <div id="preview-foto">
-                                            <span id="placeholder-foto">3 X 4</span>
-                                        </div>
-                                        <div class="form-group" id="fg-input-foto">
-                                            <label>Pilih foto</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="input-file-foto" name="foto" accept="image/*">
-                                                <label class="custom-file-label" id="label-file-foto"></label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" id="fg-nama">
-                                            <label>Nama</label>
-                                            <input type="text" class="form-control" placeholder="Nama" name="nama">
-                                        </div>
-                                        <div class="form-group" id="fg-nik">
-                                            <label>NIK</label>
-                                            <input type="number" class="form-control" placeholder="NIK" name="nik">
-                                        </div>
-                                        <div class="form-group" id="fg-kk">
-                                            <label>Nomor KK</label>
-                                            <input type="number" class="form-control" placeholder="Nomor KK" name="kk">
-                                        </div>
-                                        <div class="form-group" id="fg-jenis-kelamin">
-                                            <label>Jenis Kelamin</label>
-                                            <select class="form-control" name="jenis_kelamin">
-                                                <option value="1">Laki-Laki</option>
-                                                <option value="1">Perempuan</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-tanggal-lahir">
-                                            <label>Tanggal Lahir</label>
-                                            <input type="date" class="form-control" placeholder="Tanggal Lahir" name="tanggal_lahir">
-                                        </div>
-                                        <div class="form-group" id="fg-tempat-lahir">
-                                            <label>Tempat Lahir</label>
-                                            <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempat_lahir">
-                                        </div>
-                                        <div class="form-group" id="fg-hubungan-dalam-keluarga">
-                                            <label>Hubungan Dalam Keluarga</label>
-                                            <select class="form-control"name="hubungan_dalam_keluarga">
-                                                <option value="1">Suami</option>
-                                                <option value="1">Istri</option>
-                                                <option value="1">Anak</option>
-                                                <option value="1">Cucu</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-agama">
-                                            <label>Agama</label>
-                                            <select class="form-control" name="agama">
-                                                <option value="1">Islam</option>
-                                                <option value="1">Kristen</option>
-                                                <option value="1">Khatolik</option>
-                                                <option value="1">Hindu</option>
-                                                <option value="1">Budha</option>
-                                                <option value="1">Konghucu</option>
-                                                <option value="1">Lainnya</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-pendidikan-terakhir">
-                                            <label>Pendidikan Terakhir</label>
-                                            <select class="form-control" name="pendidikan_terakhir">
-                                                <option value="1">Belum Sekolah</option>
-                                                <option value="1">SD</option>
-                                                <option value="1">SMP</option>
-                                                <option value="1">SMA</option>
-                                                <option value="1">D1</option>
-                                                <option value="1">D2</option>
-                                                <option value="1">S3</option>
-                                                <option value="1">S1</option>
-                                                <option value="1">S2</option>
-                                                <option value="1">S3</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-pekerjaan">
-                                            <label>Pekerjaan</label>
-                                            <select class="form-control" name="pekerjaan">
-                                                <option Value="1">Belum/Tidak Bekerja</option>
-                                                <option Value="2">Mengurus Rumah Tangga</option>
-                                                <option Value="3">Pelajar/Mahasiswa</option>
-                                                <option Value="4">Pensiunan</option>
-                                                <option Value="5">Pegawai Negeri Sipil (PNS)</option>
-                                                <option Value="6">Tentara Nasional Indonesia (TNI)</option>
-                                                <option Value="7">Kepolisian RI (POLRI)</option>
-                                                <option Value="8">Wiraswasta</option>
-                                                <option Value="9">Wirausaha</option>
-                                                <option Value="10">Lainnya</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-status-perkawinan">
-                                            <label>Status Perkawinan</label>
-                                            <select class="form-control" name="status_perkawinan">
-                                                <option value="1">Belum Kawin</option>
-                                                <option value="2">Kawin</option>
-                                                <option value="3">Cerai Hidup</option>
-                                                <option value="4">Cerai Mati</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-nik-ayah">
-                                            <label>NIK Ayah</label>
-                                            <input type="number" class="form-control" placeholder="NIK Ayah" name="nik_ayah">
-                                        </div>
-                                        <div class="form-group" id="fg-nama-ayah">
-                                            <label>Nama Ayah</label>
-                                            <input type="text" class="form-control" placeholder="Nama Ayah" name="nama_ayah">
-                                        </div>
-                                        <div class="form-group" id="fg-nik-ibu">
-                                            <label>NIK Ibu</label>
-                                            <input type="number" class="form-control" placeholder="NIK Ibu" name="nik_ibu">
-                                        </div>
-                                        <div class="form-group" id="fg-nama-ibu">
-                                            <label>Nama Ibu</label>
-                                            <input type="text" class="form-control" placeholder="Nama Ibu" name="nama_ibu">
-                                        </div>
-                                        <div class="form-group" id="fg-rt">
-                                            <label>RT</label>
-                                            <select class="form-control" name="rt">
-                                                <option value="1">RT 1</option>
-                                                <option value="2">RT 2</option>
-                                                <option value="3">RT 3</option>
-                                                <option value="4">RT 4</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-rw">
-                                            <label>RW</label>
-                                            <select class="form-control" name="rw">
-                                                <option value="1">RW 1</option>
-                                                <option value="2">RW 2</option>
-                                                <option value="3">RW 3</option>
-                                                <option value="4">RW 4</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="fg-dusun">
-                                            <label>Dusun</label>
-                                            <select class="form-control" name="dusun">
-                                                <option value="1">Dusun 1</option>
-                                                <option value="2">Dusun 2</option>
-                                                <option value="3">Dusun 3</option>
-                                                <option value="4">Dusun 4</option>
-                                            </select>
+                                    <div class="form-group" id="fg-input-foto">
+                                        <label>Pilih foto</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="input-file-foto" name="foto" accept="image/*" required>
+                                            <label class="custom-file-label" id="label-file-foto"></label>
                                         </div>
                                     </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-times"></i> Batal</button>
-                                        <button type="submit" class="btn btn-primary" ><i class="fas fa-save"></i> Simpan</button>
+                                    <div class="form-group" id="fg-nama">
+                                        <label>Nama*</label>
+                                        <input type="text" class="form-control" placeholder="Nama" name="nama" required>
                                     </div>
-                                    <div id="modal-loading-tambah-data-penduduk" class="overlay d-flex justify-content-center align-items-center" style="z-index: -1;">
-                                        <i class="fas fa-2x fa-sync fa-spin"></i>
+                                    <div class="form-group" id="fg-nik">
+                                        <label>NIK*</label>
+                                        <input type="text" class="form-control" placeholder="NIK" name="nik" minlength="16" maxlength="16" required>
                                     </div>
+                                    <div class="form-group" id="fg-kk">
+                                        <label>Nomor KK*</label>
+                                        <input type="text" class="form-control" placeholder="Nomor KK" name="nomor_kk"  minlength="16" maxlength="16" required>
+                                    </div>
+                                    <div class="form-group" id="fg-jenis-kelamin">
+                                        <label>Jenis Kelamin*</label>
+                                        <select class="form-control" name="jenis_kelamin" required>
+                                            <?php
+                                            foreach($jenis_kelamin as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-tanggal-lahir">
+                                        <label>Tanggal Lahir*</label>
+                                        <input type="date" class="form-control" placeholder="Tanggal Lahir" name="tanggal_lahir" required>
+                                    </div>
+                                    <div class="form-group" id="fg-tempat-lahir">
+                                        <label>Tempat Lahir*</label>
+                                        <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempat_lahir" required>
+                                    </div>
+                                    <div class="form-group" id="fg-hubungan-dalam-keluarga">
+                                        <label>Hubungan Dalam Keluarga*</label>
+                                        <select class="form-control"name="hubungan_dalam_keluarga" required>
+                                            <?php
+                                            foreach($hubungan_dalam_keluarga as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-agama">
+                                        <label>Agama*</label>
+                                        <select class="form-control" name="agama" required>
+                                            <?php
+                                            foreach($agama as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-pendidikan-terakhir">
+                                        <label>Pendidikan Terakhir*</label>
+                                        <select class="form-control" name="pendidikan_terakhir" required>
+                                            <?php
+                                            foreach($pendidikan_terakhir as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-pekerjaan">
+                                        <label>Pekerjaan*</label>
+                                        <select class="form-control" name="pekerjaan" required>
+                                            <?php
+                                            foreach($pekerjaan as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-status-perkawinan">
+                                        <label>Status Perkawinan*</label>
+                                        <select class="form-control" name="status_perkawinan" required>
+                                            <?php
+                                            foreach($status_perkawinan as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-nik-ayah">
+                                        <label>NIK Ayah</label>
+                                        <input type="text" class="form-control" placeholder="NIK Ayah" name="nik_ayah" minlength="16" maxlength="16">
+                                    </div>
+                                    <div class="form-group" id="fg-nama-ayah">
+                                        <label>Nama Ayah</label>
+                                        <input type="text" class="form-control" placeholder="Nama Ayah" name="nama_ayah">
+                                    </div>
+                                    <div class="form-group" id="fg-nik-ibu">
+                                        <label>NIK Ibu</label>
+                                        <input type="text" class="form-control" placeholder="NIK Ibu" name="nik_ibu" minlength="16" maxlength="16">
+                                    </div>
+                                    <div class="form-group" id="fg-nama-ibu">
+                                        <label>Nama Ibu</label>
+                                        <input type="text" class="form-control" placeholder="Nama Ibu" name="nama_ibu">
+                                    </div>
+                                    <div class="form-group" id="fg-dusun">
+                                        <label>Dusun*</label>
+                                        <select class="form-control" name="dusun" id="dusun" required>
+                                            <?php
+                                            foreach($dusun as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-rw">
+                                        <label>RW*</label>
+                                        <select class="form-control" name="rw" id="rw" required>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-rt">
+                                        <label>RT*</label>
+                                        <select class="form-control" name="rt" id="rt" required>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-times"></i> Batal</button>
+                                    <button type="submit" class="btn btn-success" ></button>
+                                </div>
+                                <div id="modal-loading-tambah-data-penduduk" class="overlay d-flex justify-content-center align-items-center" style="z-index: -1;">
+                                    <i class="fas fa-2x fa-sync fa-spin"></i>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="tabel-penduduk" class="table table-bordered table-hover" style="min-width: 100%">
@@ -373,21 +377,105 @@
 
 
 <script>
-    //window.onload = function() {
-    //    const ajax = new XMLHttpRequest();
-    //    ajax.onload = function() {
-    //        if(ajax.status === 200) {
-    //
-    //        } else {
-    //            //toastr.error('Gagal, error code : ' + ajax.status);
-    //        }
-    //    };
-    //    ajax.open("GET", "http://<?//= $index_location ?>///services/ajax/getRequiredFieldDataPenduduk.php");
-    //    ajax.send();
-    //}
+    let dusunSelect = document.getElementsByName('dusun')[0];
+    dusunSelect.addEventListener('change', function(event) {
+        let rwSelect = document.getElementsByName('rw')[0];
+        removeOption(rwSelect);
+        removeOption(document.getElementsByName('rt')[0]);
+        for(rw of rw_data) {
+            if(this.value === rw.id_dusun) {
+                let opt = document.createElement('option');
+                opt.value = rw.id;
+                opt.innerText = rw.nomor;
+                rwSelect.add(opt);
+            }
+        }
+        const evt = new Event('change');
+        rwSelect.dispatchEvent(evt);
+    });
+    let evt = new Event('change');
+    dusunSelect.dispatchEvent(evt);
+
+    document.getElementsByName('rw')[0].addEventListener('change', function(event) {
+        let rtSelect = document.getElementsByName('rt')[0];
+        removeOption(rtSelect);
+        for(rt of rt_data) {
+            if(this.value === rt.id_rw) {
+                let opt = document.createElement('option');
+                opt.value = rt.id;
+                opt.innerText = rt.nomor;
+                rtSelect.add(opt);
+            }
+        }
+    });
+
+    function removeOption(select) {
+        const len = select.options.length;
+        for(i = len; i >= 0; i--) {
+            select.remove(i);
+        }
+    }
+
+    let lastAction;
+
+    function showForm(data) {
+        if(data === 'insert') {
+            if(lastAction !== 'insert') {
+                resetForm();
+            }
+            lastAction = 'insert';
+            let submitButton = document.querySelector('#formTambahDataPenduduk button[type="submit"]');
+            submitButton.innerHTML = '<i class="fas fa-save"></i> Simpan';
+            $('#modalTambahDataPenduduk').modal('show');
+        } else {
+            if(lastAction === 'insert') {
+                resetForm();
+            }
+            lastAction = 'edit';
+            let submitButton = document.querySelector('#formTambahDataPenduduk button[type="submit"]');
+            submitButton.innerHTML = '<i class="fas fa-edit"></i> Ubah';
+
+            $('#modalTambahDataPenduduk').modal('show');
+
+
+            const ajax = new XMLHttpRequest();
+            ajax.onload = function() {
+                setTimeout(function () {
+                    try {
+                        let response = JSON.parse(ajax.responseText);
+                        if(ajax.status === 200) {
+                            if(response.status === 0) {
+                                document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
+                                $('#modalTambahDataPenduduk').modal('hide');
+                                toastr.success('Berhasil menambahkan data penduduk <br>' + ajax.responseText);
+                                let table = $('#tabel-penduduk').DataTable();
+                                table.destroy();
+                                refreshTablePenduduk();
+                                resetForm();
+                            } else {
+                                toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                            }
+                        } else {
+                            toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                        }
+                    } catch (e) {
+                        toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                    }
+                    document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
+                }, 300);
+            };
+            ajax.open("GET", "<?= $index_location ?>/services/ajax/getDataPendudukByNIK.php?nik=" + data);
+            ajax.send();
+            document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = 1;
+        }
+    }
 
     // preview thumbnail foto
     document.getElementById('input-file-foto').onchange = function () {
+        let pic = document.getElementById('preview-foto');
+        while (pic.lastChild.id !== 'placeholder-foto') {
+            pic.removeChild(pic.lastChild);
+        }
         document.getElementById('placeholder-foto').style.display = "none";
 
         const file = this.files[0];
@@ -399,43 +487,43 @@
         const reader = new FileReader();
         reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
         reader.readAsDataURL(file);
-        
+
         document.getElementById('label-file-foto').innerText = file.name;
     }
 
-
-
     //Submit form tambah penduduk
     document.querySelector('#formTambahDataPenduduk').addEventListener('submit', function(event) {
-       event.preventDefault();
+        event.preventDefault();
 
         const ajax = new XMLHttpRequest();
         ajax.onload = function () {
             setTimeout(function () {
-                if(ajax.status === 200) {
+                try {
                     let response = JSON.parse(ajax.responseText);
-                    if(response.status === 0) {
-                        document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
-                        $('#modalTambahDataPenduduk').modal('hide');
-                        toastr.success('Berhasil menambahkan data penduduk <br>' + ajax.responseText);
-
-                        let table = $('#tabel-penduduk').DataTable();
-                        table.destroy();
-                        refreshTablePenduduk();
+                    if(ajax.status === 200) {
+                        if(response.status === 0) {
+                            document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
+                            $('#modalTambahDataPenduduk').modal('hide');
+                            toastr.success('Berhasil menambahkan data penduduk <br>' + ajax.responseText);
+                            let table = $('#tabel-penduduk').DataTable();
+                            table.destroy();
+                            refreshTablePenduduk();
+                            resetForm();
+                        } else {
+                            toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                        }
                     } else {
                         toastr.error('Gagal, error code : <br>' + ajax.responseText);
                     }
-
-                } else {
+                } catch (e) {
                     toastr.error('Gagal, error code : <br>' + ajax.responseText);
-                    resetForm();
                 }
                 document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
             }, 300);
         };
 
         document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = 1;
-        ajax.open("POST", "http://<?= $index_location ?>/services/ajax/simpanDataPenduduk.php");
+        ajax.open("POST", "<?= $index_location ?>/services/ajax/simpanDataPenduduk.php");
         let form = document.querySelector('#formTambahDataPenduduk');
         let data = new FormData(form);
         ajax.send(data);
@@ -460,8 +548,8 @@
 <script>
     function format(d) {
         return '<div class="dt-row-detail">' +
-            '<button type="button" data-nik="' + d.nik +'" class="dt-btn-row-detail btn btn-sm btn-warning"><i class="fas fa-edit"></i> Batal</button>' +
-            '<button type="button" data-nik=" '+ d.nik + '" class="dt-btn-row-detail btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</button></div>';
+            '<button type="button" class="dt-btn-row-detail btn btn-sm btn-warning" onclick="showForm(\'' + d.nik +'\')"><i class="fas fa-edit"></i> Edit</button>' +
+            '<button type="button" class="dt-btn-row-detail btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</button></div>';
 
     }
 
@@ -545,7 +633,7 @@
         // Array to track the ids of the details displayed rows
         var detailRows = [];
 
-        $('#tabel-penduduk tbody').on('click', 'tr', function () {
+        $('#tabel-penduduk tbody').on('click', 'tr[id^="row"]', function () {
             var tr = $(this).closest('tr');
             var row = dt.row(tr);
             var idx = $.inArray(tr.attr('id'), detailRows);
