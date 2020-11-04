@@ -27,7 +27,7 @@ function searchPage($pages) {
     endforeach;
 }
 
-$index_location = dirname(substr_replace($_SERVER['PHP_SELF'], 'localhost', 0, 0));
+$index_location = 'http://' . dirname(substr_replace($_SERVER['PHP_SELF'], 'localhost', 0, 0));
 
 ?>
 <html lang="en">
