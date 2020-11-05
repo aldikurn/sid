@@ -206,6 +206,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-jenis-kelamin">
                                         <label>Jenis Kelamin*</label>
                                         <select class="form-control" name="jenis_kelamin" required>
+                                            <option value="-1" selected disabled>Pilih jenis kelamin</option>
                                             <?php
                                             foreach($jenis_kelamin as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -224,6 +225,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-hubungan-dalam-keluarga">
                                         <label>Hubungan Dalam Keluarga*</label>
                                         <select class="form-control"name="hubungan_dalam_keluarga" required>
+                                            <option value="-1" selected disabled>Pilih hubungan dalam keluarga</option>
                                             <?php
                                             foreach($hubungan_dalam_keluarga as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -234,6 +236,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-agama">
                                         <label>Agama*</label>
                                         <select class="form-control" name="agama" required>
+                                            <option value="-1" selected disabled>Pilih agama</option>
                                             <?php
                                             foreach($agama as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -244,6 +247,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-pendidikan-terakhir">
                                         <label>Pendidikan Terakhir*</label>
                                         <select class="form-control" name="pendidikan_terakhir" required>
+                                            <option value="-1" selected disabled>Pilih pendidikan terakhir</option>
                                             <?php
                                             foreach($pendidikan_terakhir as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -254,6 +258,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-pekerjaan">
                                         <label>Pekerjaan*</label>
                                         <select class="form-control" name="pekerjaan" required>
+                                            <option value="-1" selected disabled>Pilih pekerjaan</option>
                                             <?php
                                             foreach($pekerjaan as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -264,6 +269,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-status-perkawinan">
                                         <label>Status Perkawinan*</label>
                                         <select class="form-control" name="status_perkawinan" required>
+                                            <option value="-1" selected disabled>Pilih status perkawinan</option>
                                             <?php
                                             foreach($status_perkawinan as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -290,6 +296,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-dusun">
                                         <label>Dusun*</label>
                                         <select class="form-control" name="dusun" id="dusun" required>
+                                            <option selected disabled>Pilih dusun</option>
                                             <?php
                                             foreach($dusun as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -300,11 +307,13 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-rw">
                                         <label>RW*</label>
                                         <select class="form-control" name="rw" id="rw" required>
+                                            <option selected disabled>Pilih RW</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="fg-rt">
                                         <label>RT*</label>
                                         <select class="form-control" name="rt" id="rt" required>
+                                            <option selected disabled>Pilih RT</option>
                                         </select>
                                     </div>
 
@@ -378,11 +387,11 @@ include_once ('services/getRequiredFormPenduduk.php');
 
 
 <script>
-    let dusunSelect = document.getElementsByName('dusun')[0];
-    dusunSelect.addEventListener('change', function(event) {
+    function changeDusun() {
         let rwSelect = document.getElementsByName('rw')[0];
+        let rtSelect = document.getElementsByName('rt')[0];
         removeOption(rwSelect);
-        removeOption(document.getElementsByName('rt')[0]);
+        removeOption(rtSelect);
         for(rw of rw_data) {
             if(this.value === rw.id_dusun) {
                 let opt = document.createElement('option');
@@ -391,13 +400,9 @@ include_once ('services/getRequiredFormPenduduk.php');
                 rwSelect.add(opt);
             }
         }
-        let evt = new Event('change');
-        rwSelect.dispatchEvent(evt);
-    });
-    let evt = new Event('change');
-    dusunSelect.dispatchEvent(evt);
+    }
 
-    document.getElementsByName('rw')[0].addEventListener('change', function(event) {
+    function changeRW() {
         let rtSelect = document.getElementsByName('rt')[0];
         removeOption(rtSelect);
         for(rt of rt_data) {
@@ -408,11 +413,14 @@ include_once ('services/getRequiredFormPenduduk.php');
                 rtSelect.add(opt);
             }
         }
-    });
+    }
+
+    document.getElementsByName('dusun')[0].addEventListener('change', changeDusun);
+    document.getElementsByName('rw')[0].addEventListener('change', changeRW);
 
     function removeOption(select) {
         const len = select.options.length;
-        for(i = len; i >= 0; i--) {
+        for(i = len; i > 0; i--) {
             select.remove(i);
         }
     }
@@ -445,17 +453,29 @@ include_once ('services/getRequiredFormPenduduk.php');
                     try {
                         let response = JSON.parse(ajax.responseText);
                         if(ajax.status === 200) {
-                            if(response.status === 0) {
                                 document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
-                                $('#modalTambahDataPenduduk').modal('hide');
-                                toastr.success('Berhasil menambahkan data penduduk');
-                                let table = $('#tabel-penduduk').DataTable();
-                                table.destroy();
-                                refreshTablePenduduk();
-                                resetForm();
-                            } else {
-                                toastr.error('Gagal, error code : <br>' + ajax.responseText);
-                            }
+                                let form = document.forms['formTambahDataPenduduk'];
+
+                                form['nama'].value = response.nama;
+                                form['nik'].value = response.nik;
+                                form['nomor_kk'].value = response.nomor_kk;
+                                form['jenis_kelamin'].value = response.id_jenis_kelamin;
+                                form['tanggal_lahir'].value = response.tanggal_lahir;
+                                form['tempat_lahir'].value = response.tempat_lahir;
+                                form['hubungan_dalam_keluarga'].value = response.id_hubungan_dalam_keluarga;
+                                form['agama'].value = response.id_agama;
+                                form['pendidikan_terakhir'].value = response.id_pendidikan_terakhir;
+                                form['pekerjaan'].value = response.id_pekerjaan;
+                                form['status_perkawinan'].value = response.id_status_perkawinan;
+                                form['nik_ayah'].value = response.nik_ayah;
+                                form['nama_ayah'].value = response.nama_ayah;
+                                form['nik_ibu'].value = response.nik_ibu;
+                                form['nama_ibu'].value = response.nama_ibu;
+                                form['dusun'].value = response.id_dusun;
+                                changeDusun();
+                                form['rw'].value = response.id_rw;
+                                changeRW();
+                                form['rt'].value = response.id_rt;
                         } else {
                             toastr.error('Gagal, error code : <br>' + ajax.responseText);
                         }
@@ -492,9 +512,30 @@ include_once ('services/getRequiredFormPenduduk.php');
         document.getElementById('label-file-foto').innerText = file.name;
     }
 
+    function formIsValid() {
+        let form = document.forms['formTambahDataPenduduk'];
+        let valid =
+            form['jenis_kelamin'].value != -1 &&
+            form['hubungan_dalam_keluarga'].value != -1 &&
+            form['agama'].value != -1 &&
+            form['pendidikan_terakhir'].value != -1 &&
+            form['pekerjaan'].value != -1 &&
+            form['status_perkawinan'].value != -1 &&
+            form['dusun'].value != -1 &&
+            form['rw'].value != -1 &&
+            form['rt'].value != -1;
+        toastr.warning('Data tidak lengkap');
+        return valid;
+    }
+
     //Submit form tambah penduduk
     document.querySelector('#formTambahDataPenduduk').addEventListener('submit', function(event) {
         event.preventDefault();
+
+        if(!formIsValid()) {
+
+            return;
+        }
 
         const ajax = new XMLHttpRequest();
         ajax.onload = function () {
