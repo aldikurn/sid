@@ -204,7 +204,7 @@
     Highcharts.chart('container', {
 
         data: {
-            csvURL: 'http://<?= $index_location; ?>/services/api/getCovidStatisticDashboard.php',
+            csvURL: '<?= $index_location; ?>/services/api/getCovidStatisticDashboard.php',
             beforeParse: function (csv) {
                 return csv.replace(/\n\n/g, '\n');
             }
