@@ -388,25 +388,29 @@ include_once ('services/getRequiredFormPenduduk.php');
 
 <script>
     function changeDusun() {
+        let dusunSelect = document.getElementsByName('dusun')[0];
         let rwSelect = document.getElementsByName('rw')[0];
         let rtSelect = document.getElementsByName('rt')[0];
         removeOption(rwSelect);
         removeOption(rtSelect);
-        for(rw of rw_data) {
-            if(this.value === rw.id_dusun) {
+        for(let rw of rw_data) {
+            console.log('create option ' + rw.nomor);
+            if(dusunSelect.value == rw.id_dusun) {
                 let opt = document.createElement('option');
                 opt.value = rw.id;
                 opt.innerText = rw.nomor;
                 rwSelect.add(opt);
+
             }
         }
     }
 
     function changeRW() {
+        let rwSelect = document.getElementsByName('rw')[0];
         let rtSelect = document.getElementsByName('rt')[0];
         removeOption(rtSelect);
-        for(rt of rt_data) {
-            if(this.value === rt.id_rw) {
+        for(let rt of rt_data) {
+            if(rwSelect.value == rt.id_rw) {
                 let opt = document.createElement('option');
                 opt.value = rt.id;
                 opt.innerText = rt.nomor;
@@ -483,7 +487,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                         toastr.error('Gagal, error code : <br>' + ajax.responseText);
                     }
                     document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
-                }, 300);
+                }, 600);
             };
             ajax.open("GET", "<?= $index_location ?>/services/ajax/getDataPendudukByNIK.php?nik=" + data);
             ajax.send();
