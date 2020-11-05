@@ -4,10 +4,10 @@ include_once('PageReferenceComposite.php');
 
 $pages = array(
     new PageReference('Dashboard', 'dashboard/dashboard.php', 'nav-icon fas fa-home'),
-    new PageReferenceComposite('Pantau COVID19', 'nav-icon fas fa-virus',
+    new PageReferenceComposite('Karantina Desa', 'nav-icon fas fa-virus',
         array(
             new PageReference('Tambah Pemudik', 'covid19/tambah-pemudik.php', 'fas fa-table nav-icon'),
-            new PageReference('Pemantauan', 'covid19/pemantauan.php', 'fas fa-user-cog nav-icon')
+            new PageReference('Pantau Pemudik', 'covid19/pemantauan.php', 'fas fa-user-cog nav-icon')
         )
     ),
     new PageReferenceComposite('Administrasi Desa', 'nav-icon fas fa-toolbox',
