@@ -165,15 +165,15 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
                 }
                 $i++;
             }
-            echo $query;
-            exit();
-            $stmt = $conn->query($query);
+
+            $result = $conn->query($query);
 
             if (!$upload_no_foto) {
                 array_map('unlink', glob('../assets/images/foto-penduduk/' . $old['nik'] . '*'));
                 upload_images();
             }
 
+            $response['code'] = 0;
             $response['message'] = "Data berhasil diedit berdasarkan nik";
         } else {
             $response['code'] = -1;

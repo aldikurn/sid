@@ -449,6 +449,7 @@ include_once ('services/getRequiredFormPenduduk.php');
             if(lastNikToEdit !== data) {
                 resetForm();
             }
+            lastNikToEdit = data;
             let submitButton = document.querySelector('#formTambahDataPenduduk button[type="submit"]');
             submitButton.innerHTML = '<i class="fas fa-edit"></i> Simpan Perubahan';
             $('#modalTambahDataPenduduk').modal('show');
@@ -564,7 +565,7 @@ include_once ('services/getRequiredFormPenduduk.php');
         if(lastAction ==='insert') {
             ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=insert&nik=" + form['nik'].value);
         } else {
-            ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=update&nik=" + form['nik'].value);
+            ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=update&nik=" + lastNikToEdit);
         }
 
         ajax.onload = function () {
