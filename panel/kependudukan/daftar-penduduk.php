@@ -57,6 +57,7 @@ include_once ('services/getRequiredFormPenduduk.php');
         color: #ced4da;
         font-size: 2em;
         user-select: none;
+        text-align: center;
     }
 
     #fg-input-foto {
@@ -182,12 +183,12 @@ include_once ('services/getRequiredFormPenduduk.php');
                                 <div id="modal-body-tambah-data-penduduk" class="modal-body">
                                     <p class="info-form">(*) Wajib diisi</p>
                                     <div id="preview-foto">
-                                        <span id="placeholder-foto">3 X 4</span>
+                                        <span id="placeholder-foto">Ukuran rekomendasi 3 X 4</span>
                                     </div>
                                     <div class="form-group" id="fg-input-foto">
                                         <label>Pilih foto</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="input-file-foto" name="foto" accept="image/*" required>
+                                            <input type="file" class="custom-file-input" id="input-file-foto" name="foto" accept="image/*">
                                             <label class="custom-file-label" id="label-file-foto"></label>
                                         </div>
                                     </div>
@@ -296,7 +297,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-dusun">
                                         <label>Dusun*</label>
                                         <select class="form-control" name="dusun" id="dusun" required>
-                                            <option selected disabled>Pilih dusun</option>
+                                            <option selected disabled value="-1">Pilih dusun</option>
                                             <?php
                                             foreach($dusun as $row) {
                                                 echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
@@ -307,13 +308,13 @@ include_once ('services/getRequiredFormPenduduk.php');
                                     <div class="form-group" id="fg-rw">
                                         <label>RW*</label>
                                         <select class="form-control" name="rw" id="rw" required>
-                                            <option selected disabled>Pilih RW</option>
+                                            <option selected disabled value="-1">Pilih RW</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="fg-rt">
                                         <label>RT*</label>
                                         <select class="form-control" name="rt" id="rt" required>
-                                            <option selected disabled>Pilih RT</option>
+                                            <option selected disabled value="-1">Pilih RT</option>
                                         </select>
                                     </div>
 
@@ -375,7 +376,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-danger" onclick="hapusDataPenduduk()">Hapus Data</button>
+                                <button type="button" class="btn btn-danger" onclick="processDelete()">Hapus Data</button>
                             </div>
                         </div>
                     </div>
@@ -394,7 +395,6 @@ include_once ('services/getRequiredFormPenduduk.php');
         removeOption(rwSelect);
         removeOption(rtSelect);
         for(let rw of rw_data) {
-            console.log('create option ' + rw.nomor);
             if(dusunSelect.value == rw.id_dusun) {
                 let opt = document.createElement('option');
                 opt.value = rw.id;
@@ -430,6 +430,7 @@ include_once ('services/getRequiredFormPenduduk.php');
     }
 
     let lastAction;
+    let lastNikToEdit;
 
     function showForm(data) {
         if(data === 'insert') {
@@ -445,11 +446,12 @@ include_once ('services/getRequiredFormPenduduk.php');
                 resetForm();
             }
             lastAction = 'edit';
+            if(lastNikToEdit !== data) {
+                resetForm();
+            }
             let submitButton = document.querySelector('#formTambahDataPenduduk button[type="submit"]');
-            submitButton.innerHTML = '<i class="fas fa-edit"></i> Ubah';
-
+            submitButton.innerHTML = '<i class="fas fa-edit"></i> Simpan Perubahan';
             $('#modalTambahDataPenduduk').modal('show');
-
 
             const ajax = new XMLHttpRequest();
             ajax.onload = function() {
@@ -457,39 +459,57 @@ include_once ('services/getRequiredFormPenduduk.php');
                     try {
                         let response = JSON.parse(ajax.responseText);
                         if(ajax.status === 200) {
+                            if(response.code === 0) {
                                 document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
                                 let form = document.forms['formTambahDataPenduduk'];
-
-                                form['nama'].value = response.nama;
-                                form['nik'].value = response.nik;
-                                form['nomor_kk'].value = response.nomor_kk;
-                                form['jenis_kelamin'].value = response.id_jenis_kelamin;
-                                form['tanggal_lahir'].value = response.tanggal_lahir;
-                                form['tempat_lahir'].value = response.tempat_lahir;
-                                form['hubungan_dalam_keluarga'].value = response.id_hubungan_dalam_keluarga;
-                                form['agama'].value = response.id_agama;
-                                form['pendidikan_terakhir'].value = response.id_pendidikan_terakhir;
-                                form['pekerjaan'].value = response.id_pekerjaan;
-                                form['status_perkawinan'].value = response.id_status_perkawinan;
-                                form['nik_ayah'].value = response.nik_ayah;
-                                form['nama_ayah'].value = response.nama_ayah;
-                                form['nik_ibu'].value = response.nik_ibu;
-                                form['nama_ibu'].value = response.nama_ibu;
-                                form['dusun'].value = response.id_dusun;
+                                form['nama'].value = response.data.nama;
+                                form['nik'].value = response.data.nik;
+                                form['nomor_kk'].value = response.data.nomor_kk;
+                                form['jenis_kelamin'].value = response.data.id_jenis_kelamin;
+                                form['tanggal_lahir'].value = response.data.tanggal_lahir;
+                                form['tempat_lahir'].value = response.data.tempat_lahir;
+                                form['hubungan_dalam_keluarga'].value = response.data.id_hubungan_dalam_keluarga;
+                                form['agama'].value = response.data.id_agama;
+                                form['pendidikan_terakhir'].value = response.data.id_pendidikan_terakhir;
+                                form['pekerjaan'].value = response.data.id_pekerjaan;
+                                form['status_perkawinan'].value = response.data.id_status_perkawinan;
+                                form['nik_ayah'].value = response.data.nik_ayah;
+                                form['nama_ayah'].value = response.data.nama_ayah;
+                                form['nik_ibu'].value = response.data.nik_ibu;
+                                form['nama_ibu'].value = response.data.nama_ibu;
+                                form['dusun'].value = response.data.id_dusun;
                                 changeDusun();
-                                form['rw'].value = response.id_rw;
+                                form['rw'].value = response.data.id_rw;
                                 changeRW();
-                                form['rt'].value = response.id_rt;
+                                form['rt'].value = response.data.id_rt;
+                                if(typeof response.data.foto !== 'undefined') {
+                                    let pic = document.getElementById('preview-foto');
+                                    while (pic.lastChild.id !== 'placeholder-foto') {
+                                        pic.removeChild(pic.lastChild);
+                                    }
+                                    document.getElementById('placeholder-foto').style.display = "none";
+                                    const img = document.createElement("img");
+                                    img.classList.add("obj");
+                                    img.src = response.data.foto;
+                                    pic.appendChild(img);
+                                }
+                            } else {
+                                toastr.error('Gagal mendapatkan data');
+                                console.log(ajax.responseText);
+                            }
                         } else {
-                            toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                            toastr.error('Gagal mendapatkan data');
+                            console.log(ajax.responseText);
                         }
-                    } catch (e) {
-                        toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                    } catch(e) {
+                        toastr.error('Terjadi kesalahan');
+                        console.log(e.message);
+                        console.log(ajax.responseText);
                     }
                     document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
                 }, 600);
             };
-            ajax.open("GET", "<?= $index_location ?>/services/ajax/getDataPendudukByNIK.php?nik=" + data);
+            ajax.open("GET", "<?= $index_location ?>/services/penduduk.php?action=select&nik=" + data);
             ajax.send();
             document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = 1;
         }
@@ -528,7 +548,6 @@ include_once ('services/getRequiredFormPenduduk.php');
             form['dusun'].value != -1 &&
             form['rw'].value != -1 &&
             form['rt'].value != -1;
-        toastr.warning('Data tidak lengkap');
         return valid;
     }
 
@@ -537,40 +556,51 @@ include_once ('services/getRequiredFormPenduduk.php');
         event.preventDefault();
 
         if(!formIsValid()) {
-
+            toastr.warning('Data tidak lengkap');
             return;
         }
-
+        let form = document.querySelector('#formTambahDataPenduduk');
         const ajax = new XMLHttpRequest();
+        if(lastAction ==='insert') {
+            ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=insert&nik=" + form['nik'].value);
+        } else {
+            ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=update&nik=" + form['nik'].value);
+        }
+
         ajax.onload = function () {
             setTimeout(function () {
                 try {
                     let response = JSON.parse(ajax.responseText);
                     if(ajax.status === 200) {
-                        if(response.status === 0) {
+                        if(response.code === 0) {
                             document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
                             $('#modalTambahDataPenduduk').modal('hide');
-                            toastr.success('Berhasil menambahkan data penduduk <br>' + ajax.responseText);
+                            if(lastAction ==='insert') {
+                                toastr.success('Berhasil menambahkan data penduduk');
+                            } else {
+                                toastr.success('Berhasil mengubah data penduduk');
+                            }
                             let table = $('#tabel-penduduk').DataTable();
-                            table.destroy();
-                            refreshTablePenduduk();
+                            $('#tabel-penduduk').DataTable().columns.adjust().draw();
                             resetForm();
-                        } else {
-                            toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                        } else if(response.code === -1) {
+                            toastr.warning('Data sama, tidak ada yang diubah');
+                            console.log(ajax.responseText);
                         }
                     } else {
-                        toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                        toastr.error('Terjadi kesalahan');
+                        console.log(ajax.responseText);
                     }
-                } catch (e) {
-                    toastr.error('Gagal, error code : <br>' + ajax.responseText);
+                } catch(e) {
+                    toastr.error('Terjadi kesalahan');
+                    console.log(e.message);
+                    console.log(ajax.responseText);
                 }
                 document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
             }, 300);
         };
 
         document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = 1;
-        ajax.open("POST", "<?= $index_location ?>/services/ajax/simpanDataPenduduk.php");
-        let form = document.querySelector('#formTambahDataPenduduk');
         let data = new FormData(form);
         ajax.send(data);
     });
@@ -585,8 +615,45 @@ include_once ('services/getRequiredFormPenduduk.php');
         document.getElementById('label-file-foto').innerText = "";
     }
 
-    function hapusDataPenduduk() {
+    let idToDelete = null;
 
+    function showDeleteConfirmation(id) {
+        $('#deleteModal').modal('show');
+        idToDelete = id;
+    }
+
+    function processDelete() {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if(xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.code == 0) {
+                    $('#tabel-penduduk').DataTable().columns.adjust().draw();
+
+                    $('#deleteModal').modal('hide');
+                    Swal.fire(
+                        'Sukses',
+                        'Data berhasil dihapus',
+                        'success'
+                    );
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: xhr.responseText
+                    });
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: xhr.responseText
+                });
+            }
+        }
+        xhr.open('GET', '<?= $index_location ?>/services/penduduk.php?action=delete&nik=' + idToDelete);
+        xhr.send();
     }
 </script>
 
@@ -595,11 +662,10 @@ include_once ('services/getRequiredFormPenduduk.php');
     function format(d) {
         return '<div class="dt-row-detail">' +
             '<button type="button" class="dt-btn-row-detail btn btn-sm btn-warning" onclick="showForm(\'' + d.nik +'\')"><i class="fas fa-edit"></i> Edit</button>' +
-            '<button type="button" class="dt-btn-row-detail btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</button></div>';
-
+            '<button type="button" class="dt-btn-row-detail btn btn-sm btn-danger" data-toggle="modal" onclick="showDeleteConfirmation(\'' + d.nik + '\')"><i class="fas fa-trash"></i> Hapus</button></div>';
     }
 
-    let data = null;
+    let dt;
 
     const refreshTablePenduduk = function () {
         dt = $('#tabel-penduduk').DataTable({
@@ -607,7 +673,7 @@ include_once ('services/getRequiredFormPenduduk.php');
             "serverSide": true,
             "scrollX" : true,
             "lengthMenu": [ 10, 20, 40, 80],
-            "ajax": "services/ajax/getPendudukDT.php",
+            "ajax": "services/DataTables/getPenduduk.php",
             "columns": [{
                 "class": "details-control",
                 "orderable": false,
