@@ -41,3 +41,4 @@ class DatabaseHelper
     }
 }
 $databaseHelper = new DatabaseHelper();
+$conn = new mysqli('localhost', 'root', '', 'sid');
