@@ -51,6 +51,8 @@ $index_location = 'http://' . dirname(substr_replace($_SERVER['PHP_SELF'], 'loca
     <script src="../dependencies/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../dependencies/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../dependencies/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script  src="../dependencies/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="../dependencies/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <script src="../dependencies/dist/js/adminlte.min.js"></script>
 </head>
 
