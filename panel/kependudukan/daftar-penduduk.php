@@ -143,6 +143,7 @@ include_once ('services/getRequiredFormPenduduk.php');
     @media only screen and (max-width: 991px) {
         #modal-body-tambah-data-penduduk {
             grid-template-areas:
+                'info-form'
                 'preview-foto'
                 'fg-input-foto'
                 'fg-nama'
@@ -156,6 +157,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                 'fg-pendidikan-terakhir'
                 'fg-pekerjaan'
                 'fg-status-perkawinan'
+                'fg-status-penduduk'
                 'fg-nik-ayah'
                 'fg-nama-ayah'
                 'fg-nik-ibu'
@@ -525,7 +527,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                         console.log(ajax.responseText);
                     }
                     document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
-                }, 600);
+                }, 100);
             };
             ajax.open("GET", "<?= $index_location ?>/services/penduduk.php?action=select&nik=" + data);
             ajax.send();
@@ -808,4 +810,3 @@ include_once ('services/getRequiredFormPenduduk.php');
 
     $(document).ready(refreshTablePenduduk);
 </script>
-<script src="../dependencies/plugins/toastr/toastr.min.js"></script>
