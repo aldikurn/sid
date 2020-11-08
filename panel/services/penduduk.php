@@ -58,6 +58,7 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
         $data['pendidikan_terakhir'] = $_POST['pendidikan_terakhir'];
         $data['pekerjaan'] = $_POST['pekerjaan'];
         $data['status_perkawinan'] = $_POST['status_perkawinan'];
+        $data['status_penduduk'] = $_POST['status_penduduk'];
         $data['id_rt'] = $_POST['rt'];
 
         foreach ($data as $val) {
@@ -74,8 +75,8 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             $data['nik_ibu'] = $_POST['nik_ibu'];
             $data['nama_ibu'] = $_POST['nama_ibu'];
 
-            $stmt = $conn->prepare("INSERT INTO penduduk(nik, nomor_kk, nama, id_jenis_kelamin, tanggal_lahir, tempat_lahir, id_hubungan_dalam_keluarga, id_agama, id_pendidikan_terakhir, id_pekerjaan, id_status_perkawinan, nik_ayah, nama_ayah, nik_ibu, nama_ibu, id_rt) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssissiiiiissssi", $data['nik'], $data['nomor_kk'], $data['nama'], $data['jenis_kelamin'], $data['tanggal_lahir'], $data['tempat_lahir'], $data['hubungan_dalam_keluarga'], $data['agama'], $data['pendidikan_terakhir'], $data['pekerjaan'], $data['status_perkawinan'], $data['nik_ayah'], $data['nama_ayah'], $data['nik_ibu'], $data['nama_ibu'], $data['id_rt']);
+            $stmt = $conn->prepare("INSERT INTO penduduk(nik, nomor_kk, nama, id_jenis_kelamin, tanggal_lahir, tempat_lahir, id_hubungan_dalam_keluarga, id_agama, id_pendidikan_terakhir, id_pekerjaan, id_status_perkawinan, id_status_penduduk, nik_ayah, nama_ayah, nik_ibu, nama_ibu, id_rt) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssissiiiiissssi", $data['nik'], $data['nomor_kk'], $data['nama'], $data['jenis_kelamin'], $data['tanggal_lahir'], $data['tempat_lahir'], $data['hubungan_dalam_keluarga'], $data['agama'], $data['pendidikan_terakhir'], $data['pekerjaan'], $data['status_perkawinan'], $data['status_penduduk'], $data['nik_ayah'], $data['nama_ayah'], $data['nik_ibu'], $data['nama_ibu'], $data['id_rt']);
             $stmt->execute();
             $stmt->close();
             upload_images();
@@ -109,7 +110,7 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             $changed['nama'] = $_POST['nama'];
         }
         if($old['id_jenis_kelamin'] != $_POST['jenis_kelamin']) {
-            $changed['jenis_kelamin'] = $_POST['jenis_kelamin'];
+            $changed['id_jenis_kelamin'] = $_POST['jenis_kelamin'];
         }
         if($old['tanggal_lahir'] != $_POST['tanggal_lahir']) {
             $changed['tanggal_lahir'] = $_POST['tanggal_lahir'];
@@ -118,19 +119,22 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             $changed['tempat_lahir'] = $_POST['tempat_lahir'];
         }
         if($old['id_hubungan_dalam_keluarga'] != $_POST['hubungan_dalam_keluarga']) {
-            $changed['hubungan_dalam_keluarga'] = $_POST['hubungan_dalam_keluarga'];
+            $changed['id_hubungan_dalam_keluarga'] = $_POST['hubungan_dalam_keluarga'];
         }
         if($old['id_agama'] != $_POST['agama']) {
             $changed['agama'] = $_POST['agama'];
         }
         if($old['id_pendidikan_terakhir'] != $_POST['pendidikan_terakhir']) {
-            $changed['pendidikan_terakhir'] = $_POST['pendidikan_terakhir'];
+            $changed['id_pendidikan_terakhir'] = $_POST['pendidikan_terakhir'];
         }
         if($old['id_pekerjaan'] != $_POST['pekerjaan']) {
-            $changed['pekerjaan'] = $_POST['pekerjaan'];
+            $changed['id_pekerjaan'] = $_POST['pekerjaan'];
         }
         if($old['id_status_perkawinan'] != $_POST['status_perkawinan']) {
-            $changed['status_perkawinan'] = $_POST['status_perkawinan'];
+            $changed['id_status_perkawinan'] = $_POST['status_perkawinan'];
+        }
+        if($old['id_status_penduduk'] != $_POST['status_penduduk']) {
+            $changed['id_status_penduduk'] = $_POST['status_penduduk'];
         }
         if($old['nik_ayah'] != $_POST['nik_ayah']) {
             $changed['nik_ayah'] = $_POST['nik_ayah'];
@@ -145,7 +149,7 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             $changed['nama_ibu'] = $_POST['nama_ibu'];
         }
         if($old['id_rt'] != $_POST['rt']) {
-            $changed['rt'] = $_POST['rt'];
+            $changed['id_rt'] = $_POST['rt'];
         }
 
         $upload_no_foto = ($_FILES['foto']['name'] == '') OR ($_FILES['foto']['size'] == 0);

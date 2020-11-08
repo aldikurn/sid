@@ -30,6 +30,7 @@ $columns = array(
     array('db' => 'pendidikan_terakhir',   'dt' => 'pendidikan_terakhir'),
     array('db' => 'pekerjaan',   'dt' => 'pekerjaan'),
     array('db' => 'status_perkawinan',   'dt' => 'status_perkawinan'),
+    array('db' => 'status_penduduk',   'dt' => 'status_penduduk'),
     array('db' => 'nik_ayah',   'dt' => 'nik_ayah'),
     array('db' => 'nama_ayah',   'dt' => 'nama_ayah'),
     array('db' => 'nik_ibu',   'dt' => 'nik_ibu'),

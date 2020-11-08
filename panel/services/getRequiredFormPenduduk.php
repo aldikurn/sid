@@ -54,6 +54,14 @@ foreach($result as $row) {
         'nama' => $row['nama']
     );
 }
+$result = mysqli_query($databaseHelper->getConnection(), "SELECT * FROM dt_status_penduduk");
+$status_penduduk = array();
+foreach($result as $row) {
+    $status_penduduk[] = array(
+        'id' => $row['id'],
+        'nama' => $row['nama']
+    );
+}
 
 $result = mysqli_query($databaseHelper->getConnection(), "SELECT * FROM dusun");
 $dusun = array();

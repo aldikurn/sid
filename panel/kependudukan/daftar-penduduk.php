@@ -19,7 +19,7 @@ include_once ('services/getRequiredFormPenduduk.php');
             'preview-foto preview-foto fg-kk fg-kk fg-kk fg-kk'
             'fg-jenis-kelamin fg-jenis-kelamin fg-tanggal-lahir fg-tanggal-lahir fg-tempat-lahir fg-tempat-lahir'
             'fg-hubungan-dalam-keluarga fg-hubungan-dalam-keluarga fg-agama fg-agama fg-pendidikan-terakhir fg-pendidikan-terakhir'
-            'fg-pekerjaan fg-pekerjaan fg-pekerjaan fg-status-perkawinan fg-status-perkawinan fg-status-perkawinan'
+            'fg-pekerjaan fg-pekerjaan fg-status-perkawinan fg-status-perkawinan fg-status-penduduk fg-status-penduduk'
             'fg-nik-ayah fg-nik-ayah fg-nik-ayah fg-nama-ayah fg-nama-ayah fg-nama-ayah'
             'fg-nik-ibu fg-nik-ibu fg-nik-ibu fg-nama-ibu fg-nama-ibu fg-nama-ibu'
             'fg-dusun fg-dusun fg-rw fg-rw fg-rt fg-rt';
@@ -106,6 +106,10 @@ include_once ('services/getRequiredFormPenduduk.php');
 
     #fg-status-perkawinan {
         grid-area: fg-status-perkawinan;
+    }
+
+    #fg-status-penduduk {
+        grid-area: fg-status-penduduk;
     }
 
     #fg-nik-ayah {
@@ -278,6 +282,17 @@ include_once ('services/getRequiredFormPenduduk.php');
                                             ?>
                                         </select>
                                     </div>
+                                    <div class="form-group" id="fg-status-penduduk">
+                                        <label>Status Penduduk*</label>
+                                        <select class="form-control" name="status_penduduk" required>
+                                            <option value="-1" selected disabled>Pilih status penduduk</option>
+                                            <?php
+                                            foreach($status_penduduk as $row) {
+                                                echo '<option value="' . $row['id']  . '">' .  $row['nama'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                     <div class="form-group" id="fg-nik-ayah">
                                         <label>NIK Ayah</label>
                                         <input type="text" class="form-control" placeholder="NIK Ayah" name="nik_ayah" minlength="16" maxlength="16">
@@ -349,6 +364,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                         <th>Pendidikan Terakhir</th>
                         <th>Pekerjaan</th>
                         <th>Status Perkawinan</th>
+                        <th>Status Penduduk</th>
                         <th>NIK Ayah</th>
                         <th>Nama Ayah</th>
                         <th>NIK Ibu</th>
@@ -474,6 +490,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                 form['pendidikan_terakhir'].value = response.data.id_pendidikan_terakhir;
                                 form['pekerjaan'].value = response.data.id_pekerjaan;
                                 form['status_perkawinan'].value = response.data.id_status_perkawinan;
+                                form['status_penduduk'].value = response.data.id_status_penduduk;
                                 form['nik_ayah'].value = response.data.nik_ayah;
                                 form['nama_ayah'].value = response.data.nama_ayah;
                                 form['nik_ibu'].value = response.data.nik_ibu;
@@ -546,6 +563,7 @@ include_once ('services/getRequiredFormPenduduk.php');
             form['pendidikan_terakhir'].value != -1 &&
             form['pekerjaan'].value != -1 &&
             form['status_perkawinan'].value != -1 &&
+            form['status_penduduk'].value != -1 &&
             form['dusun'].value != -1 &&
             form['rw'].value != -1 &&
             form['rt'].value != -1;
@@ -713,6 +731,9 @@ include_once ('services/getRequiredFormPenduduk.php');
                 },
                 {
                     "data": "status_perkawinan"
+                },
+                {
+                    "data": "status_penduduk"
                 },
                 {
                     "data": "nik_ayah"
