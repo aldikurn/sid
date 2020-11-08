@@ -13,13 +13,15 @@ SELECT
     dt_pendidikan_terakhir.nama pendidikan_terakhir,
     dt_pekerjaan.nama pekerjaan,
     dt_status_perkawinan.nama status_perkawinan,
+    dt_status_penduduk.nama status_penduduk,
     penduduk.nik_ayah,
     penduduk.nama_ayah,
     penduduk.nik_ibu,
     penduduk.nama_ibu,
     rt.nomor rt,
     rw.nomor rw,
-    dusun.nama dusun
+    dusun.nama dusun,
+    penduduk.tanggal_rekam
 FROM penduduk
 INNER JOIN dt_jenis_kelamin
 	ON dt_jenis_kelamin.id = penduduk.id_jenis_kelamin
@@ -33,6 +35,8 @@ INNER JOIN dt_pekerjaan
 	ON dt_pekerjaan.id = penduduk.id_pekerjaan
 INNER JOIN dt_status_perkawinan
 	ON dt_status_perkawinan.id = penduduk.id_status_perkawinan
+INNER JOIN dt_status_penduduk
+	ON dt_status_penduduk.id = penduduk.id_status_penduduk
 INNER JOIN rt
 	ON rt.id = penduduk.id_rt
 INNER JOIN rw
