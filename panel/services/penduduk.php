@@ -20,28 +20,33 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             $response['code'] = 0;
             $response['message'] = "Berhasil mengambil semua records";;
         } else {
-            $stmt = $conn->prepare('SELECT penduduk.*, rw.id as id_rw, dusun.id as id_dusun FROM penduduk INNER JOIN rt ON rt.id = penduduk.id_rt INNER JOIN rw ON rw.id = rt.id_rw INNER JOIN dusun ON dusun.id = rw.id_dusun WHERE penduduk.nik = ?');
+            $stmt = $conn->prepare('SELECT penduduk.*, rw.id as id_rw, dusun.id as id_dusun, dusun.nama as nama_dusun, rw.nomor as nomor_rw, rt.nomor as nomor_rt FROM penduduk INNER JOIN rt ON rt.id = penduduk.id_rt INNER JOIN rw ON rw.id = rt.id_rw INNER JOIN dusun ON dusun.id = rw.id_dusun WHERE penduduk.nik = ?');
             $stmt->bind_param("s", $_GET['nik']);
             $stmt->execute();
             $result = $stmt->get_result();
 
-            foreach ($result as $row) {
-                $response['data'] = $row;
-            }
-            $foto_path = glob('../assets/images/foto-penduduk/' . $response['data']['nik'] . '*');
-            $temp = null;
-            foreach($foto_path as $var) {
-                $type = pathinfo($var, PATHINFO_EXTENSION);
-                $data = file_get_contents($var);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                $temp = $base64;
-            }
-            if($temp != null) {
-                $response['data']['foto'] = $temp;
+            if($result->num_rows > 0) {
+                foreach ($result as $row) {
+                    $response['data'] = $row;
+                }
+                $foto_path = glob('../assets/images/foto-penduduk/' . $response['data']['nik'] . '*');
+                $temp = null;
+                foreach($foto_path as $var) {
+                    $type = pathinfo($var, PATHINFO_EXTENSION);
+                    $data = file_get_contents($var);
+                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    $temp = $base64;
+                }
+                if($temp != null) {
+                    $response['data']['foto'] = $temp;
+                }
+                $response['code'] = 0;
+                $response['message'] = "Berhasil mengambil record penduduk berdasarkan nik";
+            } else {
+                $response['code'] = 1;
+                $response['message'] = "Data tidak ditemukan";
             }
             $stmt->close();
-            $response['code'] = 0;
-            $response['message'] = "Berhasil mengambil record penduduk berdasarkan nik";
         };
     } elseif ($_GET['action'] === 'insert') {
         $dataLengkap = false;
