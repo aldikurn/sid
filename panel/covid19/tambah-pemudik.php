@@ -1,9 +1,61 @@
 <style>
+    #tambahpemudik {
+        display: grid;
+        grid-template-areas:
+            'fg-nik fg-nik'
+            'fg-nama fg-ttl'
+            'fg-alamat fg-asal'
+            'fg-tujuan fg-durasi'
+            'fg-status-covid19 fg-wajib-pantau'
+            'fg-keluhan-kesehatan fg-keluhan-kesehatan'
+            'fg-submit fg-submit';
+        gap: 1rem;
+    }
+    
     #fg-nik {
+        grid-area: fg-nik;
         display: grid;
         align-items: end;
         gap: 0.7em;
         grid-template-columns: 1fr 100px;
+    }
+    
+    #fg-ttl {
+        grid-area: fg-ttl;
+    }
+
+    #fg-alamat {
+        grid-area: fg-alamat;
+    }
+
+    #fg-asal {
+        grid-area: fg-asal;
+    }
+
+    #fg-tujuan {
+        grid-area: fg-tujuan;
+    }
+
+    #fg-durasi {
+        grid-area: fg-durasi;
+    }
+
+    #fg-status-covid19 {
+        grid-area: fg-status-covid19;
+    }
+
+    #fg-wajib-pantau {
+        grid-area: fg-wajib-pantau;
+    }
+
+    #fg-keluhan-kesehatan {
+        grid-area: fg-keluhan-kesehatan;
+    }
+
+    #fg-submit {
+        grid-area: fg-submit;
+        display: flex;
+        justify-content: flex-end;
     }
 </style>
 <div class="row">
@@ -26,7 +78,7 @@
                                 <form id="tambahpemudik" action="" method="POST">
                                     <div class="form-group" id="fg-nik">
                                         <div>
-                                            <label>NIK <em style="font-weight: normal">(lihat menu daftar penduduk untuk melihat daftar nik)</em></label>
+                                            <label>NIK <em style="font-weight: normal">(masuk menu daftar penduduk untuk melihat daftar nik)</em></label>
                                             <input type="text" class="form-control" placeholder="NIK" name="nik" required>
                                         </div>
                                         <a class="btn btn-default" id="cekdata">Cek Data</a>
@@ -43,7 +95,7 @@
                                         <label>Alamat</label>
                                         <input type="text" class="form-control" name="alamat" value="---" disabled required>
                                     </div>
-                                    <div class="form-group" id="fg-asal-pemudik">
+                                    <div class="form-group" id="fg-asal">
                                         <label>Kota Asal Pemudik</label>
                                         <input type="text" class="form-control" placeholder="Asal Pemudik" name="asal" required>
                                     </div>
@@ -83,11 +135,13 @@
                                         <label>Keluhan Kesehatan</label>
                                         <textarea class="form-control" name="keluhan-kesehatan" id="keluhan-kesehatan" rows="3" ></textarea>
                                     </div>
-                                    <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
+                                    <div class="form-group" id="fg-submit">
+                                        <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="nav-nondomisili" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <p>Untuk menambahkan data penduduk non domisili, silahkan masuk ke menu daftar penduduk</p>
+                                <p>Untuk menambahkan data baru penduduk non domisili, silahkan masuk ke menu daftar penduduk</p>
                                     <form action="" method="POST">
                                         <button type="submit" name="path" value="kependudukan/daftar-penduduk.php" class="btn btn-default">Pergi</button>
                                     </form>
