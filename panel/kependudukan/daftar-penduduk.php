@@ -189,7 +189,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                                 <div id="modal-body-tambah-data-penduduk" class="modal-body">
                                     <p class="info-form">(*) Wajib diisi</p>
                                     <div id="preview-foto">
-                                        <span id="placeholder-foto">Ukuran rekomendasi 3 X 4</span>
+                                        <span id="placeholder-foto">Ukuran rekomendasi 3x4</span>
                                     </div>
                                     <div class="form-group" id="fg-input-foto">
                                         <label>Pilih foto</label>
