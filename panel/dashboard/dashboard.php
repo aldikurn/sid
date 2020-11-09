@@ -1,3 +1,6 @@
+<?php
+include_once('services/dashboard.php');
+?>
 <style>
     .info-box-text {
         font-size: 0.8em;
@@ -9,7 +12,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner" style="color: white">
-                <h3>5</h3>
+                <h3><?= $info_desa['dusun'] ?></h3>
 
                 <p>Wilayah Dusun</p>
             </div>
@@ -25,7 +28,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>500</h3>
+                <h3><?= $info_desa['penduduk'] ?></h3>
                 <p>Penduduk</p>
             </div>
             <div class="icon">
@@ -39,7 +42,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>100</h3>
+                <h3><?= $info_desa['keluarga'] ?></h3>
                 <p>Keluarga</p>
             </div>
             <div class="icon">
@@ -55,7 +58,7 @@
         <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
-                <h3>15</h3>
+                <h3><?= $info_desa['perangkat_desa'] ?></h3>
                 <p>Perangkat Desa</p>
             </div>
             <div class="icon">
@@ -94,7 +97,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Positif</span>
-                                <span class="info-box-number">10</span>
+                                <span class="info-box-number"><?= $covid19_desa['positif'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -109,7 +112,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Pasien Dalam Pengawasan</span>
-                                <span class="info-box-number">10</span>
+                                <span class="info-box-number"><?= $covid19_desa['pdp'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -127,7 +130,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Orang Dalam Pemantauan</span>
-                                <span class="info-box-number">10</span>
+                                <span class="info-box-number"><?= $covid19_desa['odp'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -142,7 +145,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Orang Dalam Resiko</span>
-                                <span class="info-box-number">10</span>
+                                <span class="info-box-number"><?= $covid19_desa['odr'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
