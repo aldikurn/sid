@@ -149,7 +149,7 @@ function printSideBarMenu($pages)
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="." class="brand-link">
-            <img src="assets/images/logo-desa/logo.png" alt="Logo Provinsi Jawa Timur"
+            <img src="assets/images/logo-desa/logo-desa.png" alt="Logo Provinsi Jawa Timur"
                  class="brand-image img-circle elevation-3">
             <span class="brand-text font-weight-light">Desa Sugihwaras</span>
         </a>

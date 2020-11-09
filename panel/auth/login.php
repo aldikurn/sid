@@ -44,7 +44,7 @@
 <div class="bg-login" style="position:absolute; background-image:url(../assets/images/background-login.jpg); background-size: cover; filter: blur(8px);"></div>
 <div class="login-box">
     <figure class="logo-desa">
-        <img src="../assets/images/logo-desa/logo.png">
+        <img src="../assets/images/logo-desa/logo-desa.png">
     </figure>
   <div class="login-logo">
     <a href="#"><b>Sistem Informasi Desa</b> Sugihwaras</a>
