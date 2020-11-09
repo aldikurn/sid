@@ -21,7 +21,7 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
                     $response['message'] = "Berhasil mengambil semua records dengan wajib pantau = 1";
                 }
             } else {
-                $stmt = $conn->prepare("SELECT * FROM pemudik");
+                $stmt = $conn->prepare("SELECT * FROM pemudik WHERE CURDATE() < DATE_ADD(tanggal_tiba, INTERVAL durasi DAY)");
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $response['data'] = array();
