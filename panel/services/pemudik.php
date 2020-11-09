@@ -8,17 +8,31 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
 
     if ($_GET['action'] === 'select') {
         if ($_GET['nik'] == 'all') {
-            $stmt = $conn->prepare("SELECT * FROM pemudik");
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $response['data'] = array();
-            foreach ($result as $row) {
-                $response['data'][] = $row;
-            }
+            if(isset($_GET['wajib_pantau'])) {
+                if($_GET['wajib_pantau'] === '1') {
+                    $stmt = $conn->prepare("SELECT pemudik.*, penduduk.nama FROM pemudik INNER JOIN penduduk ON pemudik.nik = penduduk.nik WHERE wajib_pantau='ya'");
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $response['data'] = array();
+                    foreach ($result as $row) {
+                        $response['data'][] = $row;
+                    }
 
+                    $response['message'] = "Berhasil mengambil semua records dengan wajib pantau = 1";
+                }
+            } else {
+                $stmt = $conn->prepare("SELECT * FROM pemudik");
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $response['data'] = array();
+                foreach ($result as $row) {
+                    $response['data'][] = $row;
+                }
+
+                $response['message'] = "Berhasil mengambil semua records";
+            }
             $stmt->close();
             $response['code'] = 0;
-            $response['message'] = "Berhasil mengambil semua records";;
         } else {
             $stmt = $conn->prepare('SELECT pemudik.*, penduduk.nama FROM pemudik INNER JOIN penduduk ON pemudik.nik = penduduk.nik WHERE pemudik.nik = ?');
             $stmt->bind_param("s", $_GET['nik']);
