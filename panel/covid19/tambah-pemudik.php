@@ -62,19 +62,19 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <nav>
+                <!-- <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-domisili-tab" data-toggle="tab" href="#nav-domisili" role="tab" aria-controls="nav-home" aria-selected="true">Domisili</a>
                         <a class="nav-item nav-link" id="nav-nondomisili-tab" data-toggle="tab" href="#nav-nondomisili" role="tab" aria-controls="nav-profile" aria-selected="false">Non Domisili</a>
                     </div>
-                </nav>
+                </nav> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-domisili" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <!-- <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-domisili" role="tabpanel" aria-labelledby="nav-home-tab"> -->
                                 <form id="tambahpemudik" action="" method="POST">
                                     <div class="form-group" id="fg-nik">
                                         <div>
@@ -139,15 +139,15 @@
                                         <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="tab-pane fade" id="nav-nondomisili" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <!-- </div> -->
+                            <!-- <div class="tab-pane fade" id="nav-nondomisili" role="tabpanel" aria-labelledby="nav-profile-tab">
                                 <p>Untuk menambahkan data baru penduduk non domisili, silahkan masuk ke menu daftar penduduk</p>
                                     <form action="" method="POST">
                                         <button type="submit" name="path" value="kependudukan/daftar-penduduk.php" class="btn btn-default">Pergi</button>
                                     </form>
-                            </div>
-                        </div>
-                    </div>
+                            </div> -->
+                        <!-- </div>
+                    </div> -->
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
