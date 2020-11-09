@@ -56,17 +56,57 @@
     }
 
 </style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Daftar Pemantauan</h5>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                    <table id="table-pantau-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Nmr</th>
+                        <th>Tanggal Pemantauan</th>
+                        <th>Tanggal Tiba</th>
+                        <th>Hari ke</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Suhu Tubuh</th>
+                        <th>Batuk</th>
+                        <th>Flu</th>
+                        <th>Sesak Nafas</th>
+                        <th>Keluhan Lain</th>
+                        <th>Status COVID19</th>
+                    </tr>
+                    </thead>
+                </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- ./card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card collapsed-card">
             <div class="card-header">
                 <h5 style="margin-right: auto">Tambah data pemantauan</h5>
                 <div>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    </button>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-plus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
@@ -128,28 +168,7 @@
     <!-- /.col -->
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>Daftar Pemantauan</h5>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
 
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- ./card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
 <script>
     let xhr = new XMLHttpRequest();
     xhr.open('GET', '<?= $index_location ?>/services/pemudik.php?action=select&nik=all&wajib_pantau=1');
@@ -243,6 +262,7 @@
                     if(response.code === 0) {
                         toastr.success(response.message);
                         form.reset();
+                        $('#table-pantau-pemudik').DataTable().columns.adjust().draw();
                     } else {
                         toastr.error('Terjadi Kesalahan');
                         console.log(ajax.responseText);
@@ -281,4 +301,71 @@
         result = result + 'T' + hour + ':' + minute;
         return result;
     }
+</script>
+
+<script>
+    let dt;
+
+    const refreshTablePantauPemudik = function () {
+        dt = $('#table-pantau-pemudik').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "scrollX" : true,
+            "lengthMenu": [10, 20],
+            "ajax": "services/DataTables/getPantauPemudik.php",
+            "columns": [{
+                "orderable": false,
+                "data": null,
+                "defaultContent": ""
+            },
+            {
+                "data": "waktu_pantau"
+            },
+            {
+                "data": "tanggal_tiba"
+            },
+            {
+                "data": "data_hari_ke"
+            },
+            {
+                "data": "nik"
+            },
+            {
+                "data": "nama"
+            },
+            {
+                "data": "suhu_tubuh"
+            },
+            {
+                "data": "batuk"
+            },
+            {
+                "data": "flu"
+            },
+            {
+                "data": "sesak_nafas"
+            },
+            {
+                "data": "keluhan_lain"
+            },
+            {
+                "data": "status_covid19"
+            }
+            ],
+            "order": [
+                [1, 'asc']
+            ]
+        });
+
+        dt.on('draw', function () {
+            dt.column(0, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        });
+    };
+
+    $(document).ready(refreshTablePantauPemudik);
 </script>
