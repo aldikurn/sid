@@ -19,8 +19,12 @@ include_once('services/dashboard.php');
             <div class="icon">
                 <i class="fas fa-map nav-icon"></i>
             </div>
-            <a href="#" class="small-box-footer" style="color: white !important">More info
-                <i class="fas fa-arrow-circle-right" style="color: white"></i>
+            <a href="#" onclick="document.forms['vm-daftar-dusun'].submit()" class="small-box-footer" style="color: white !important">
+                More info 
+                <i class="fas fa-arrow-circle-right"></i>
+                <form action="" method="POST" id="vm-daftar-dusun" style="display: none">
+                    <input type="text" name="path" value="administrasi-desa/dusun.php">
+                </form>
             </a>
         </div>
     </div>
@@ -34,7 +38,13 @@ include_once('services/dashboard.php');
             <div class="icon">
                 <i class="fas fa-user nav-icon"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" onclick="document.forms['vm-daftar-penduduk'].submit()" class="small-box-footer">
+                More info 
+                <i class="fas fa-arrow-circle-right"></i>
+                <form action="" method="POST" id="vm-daftar-penduduk" style="display: none">
+                    <input type="text" name="path" value="kependudukan/daftar-penduduk.php">
+                </form>
+            </a>
         </div>
     </div>
     <!-- ./col -->
@@ -48,7 +58,13 @@ include_once('services/dashboard.php');
             <div class="icon">
                 <i class="fas fa-users nav-icon"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" onclick="document.forms['vm-daftar-keluarga'].submit()" class="small-box-footer">
+                More info 
+                <i class="fas fa-arrow-circle-right"></i>
+                <form action="" method="POST" id="vm-daftar-keluarga" style="display: none">
+                    <input type="text" name="path" value="kependudukan/daftar-keluarga.php">
+                </form>
+            </a>
         </div>
     </div>
     <!-- ./col -->
@@ -64,7 +80,13 @@ include_once('services/dashboard.php');
             <div class="icon">
                 <i class="fas fa-user-tie nav-icon"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" onclick="document.forms['vm-perangkat-desa'].submit()" class="small-box-footer">
+                More info 
+                <i class="fas fa-arrow-circle-right"></i>
+                <form action="" method="POST" id="vm-perangkat-desa" style="display: none">
+                    <input type="text" name="path" value="administrasi-desa/perangkat-desa.php">
+                </form>
+            </a>
         </div>
     </div>
     <!-- ./col -->
