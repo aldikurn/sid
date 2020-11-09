@@ -63,7 +63,7 @@ function printSideBarMenu($pages)
     foreach ($pages as $page) :
         if ($page instanceof PageReferenceComposite) {
 ?>
-            <li class="nav-item has-treeview menu-open">
+            <li class="nav-item has-treeview">
                 <a href="" class="nav-link <?= isActive($page->subMenu) ? 'active' : '' ?>">
                     <i class="<?= $page->icon ?>"></i>
                     <p>
@@ -149,7 +149,7 @@ function printSideBarMenu($pages)
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="." class="brand-link">
-            <img src="assets/images/logo-jatim.png" alt="Logo Provinsi Jawa Timur"
+            <img src="assets/images/logo-desa/logo.png" alt="Logo Provinsi Jawa Timur"
                  class="brand-image img-circle elevation-3">
             <span class="brand-text font-weight-light">Desa Sugihwaras</span>
         </a>
