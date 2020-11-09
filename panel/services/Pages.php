@@ -4,6 +4,12 @@ include_once('PageReferenceComposite.php');
 
 $pages = array(
     new PageReference('Dashboard', 'dashboard/dashboard.php', 'nav-icon fas fa-home'),
+    new PageReferenceComposite('Kependudukan', 'nav-icon fas fa-users-cog',
+        array(
+            new PageReference('Daftar Penduduk', 'kependudukan/daftar-penduduk.php', 'fas fa-user nav-icon'),
+            new PageReference('Daftar Keluarga', 'kependudukan/daftar-keluarga.php', 'fas fa-users nav-icon')
+        )
+    ),
     new PageReferenceComposite('Isolasi COVID19 Desa', 'nav-icon fas fa-virus',
         array(
             new PageReference('Tambah Pemudik', 'covid19/tambah-pemudik.php', 'fas fa-table nav-icon'),
@@ -15,12 +21,6 @@ $pages = array(
             new PageReference('Identitas Desa', 'administrasi-desa/identitas-desa.php', 'fas fa-id-card nav-icon'),
             new PageReference('Dusun', 'administrasi-desa/dusun.php', 'fas fa-map nav-icon'),
             new PageReference('Perangkat Desa', 'administrasi-desa/perangkat-desa.php', 'fas fa-user-tie nav-icon')
-        )
-    ),
-    new PageReferenceComposite('Kependudukan', 'nav-icon fas fa-users-cog',
-        array(
-            new PageReference('Daftar Penduduk', 'kependudukan/daftar-penduduk.php', 'fas fa-user nav-icon'),
-            new PageReference('Daftar Keluarga', 'kependudukan/daftar-keluarga.php', 'fas fa-users nav-icon')
         )
     ),
     new PageReferenceComposite('Statistik', 'nav-icon fas fa-chart-line',
