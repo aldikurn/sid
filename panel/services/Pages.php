@@ -4,16 +4,16 @@ include_once('PageReferenceComposite.php');
 
 $pages = array(
     new PageReference('Dashboard', 'dashboard/dashboard.php', 'nav-icon fas fa-home'),
-    new PageReferenceComposite('Kependudukan', 'nav-icon fas fa-users-cog',
-        array(
-            new PageReference('Daftar Penduduk', 'kependudukan/daftar-penduduk.php', 'fas fa-user nav-icon'),
-            new PageReference('Daftar Keluarga', 'kependudukan/daftar-keluarga.php', 'fas fa-users nav-icon')
-        )
-    ),
     new PageReferenceComposite('Isolasi COVID19 Desa', 'nav-icon fas fa-virus',
         array(
             new PageReference('Daftar Pemudik', 'covid19/tambah-pemudik.php', 'fas fa-table nav-icon'),
             new PageReference('Pantau Pemudik', 'covid19/pemantauan.php', 'fas fa-user-cog nav-icon')
+        )
+    ),
+    new PageReferenceComposite('Kependudukan', 'nav-icon fas fa-users-cog',
+        array(
+            new PageReference('Daftar Penduduk', 'kependudukan/daftar-penduduk.php', 'fas fa-user nav-icon'),
+            new PageReference('Daftar Keluarga', 'kependudukan/daftar-keluarga.php', 'fas fa-users nav-icon')
         )
     ),
     new PageReferenceComposite('Administrasi Desa', 'nav-icon fas fa-toolbox',
