@@ -12,7 +12,7 @@ $pages = array(
     ),
     new PageReferenceComposite('Isolasi COVID19 Desa', 'nav-icon fas fa-virus',
         array(
-            new PageReference('Tambah Pemudik', 'covid19/tambah-pemudik.php', 'fas fa-table nav-icon'),
+            new PageReference('Daftar Pemudik', 'covid19/tambah-pemudik.php', 'fas fa-table nav-icon'),
             new PageReference('Pantau Pemudik', 'covid19/pemantauan.php', 'fas fa-user-cog nav-icon')
         )
     ),
