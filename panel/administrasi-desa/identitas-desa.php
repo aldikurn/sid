@@ -107,10 +107,12 @@
             </div>
             <!-- ./card-body -->
 
-            <div class="card-footer">
-                <button id="ubah" class="btn btn-warning mr-auto">Ubah</button>
-                <button id="batal" class="btn btn-default mr-2 d-none">Batal</button>
-                <button type="submit" id="simpan" class="btn btn-success d-none">Simpan</button>
+            <div class="card-footer ">
+                <div class="d-flex">
+                    <button id="ubah" class="btn btn-warning mr-auto">Ubah</button>
+                    <button id="batal" class="btn btn-default mr-2 d-none">Batal</button>
+                    <button type="submit" id="simpan" class="btn btn-success d-none">Simpan</button>
+                </div>
             </div>
         </div>
         <!-- /.card -->
