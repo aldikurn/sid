@@ -55,13 +55,24 @@
         justify-content: space-between;
     }
 
+    td {
+        cursor: default;
+    }
+
 </style>
 
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5>Daftar Pemantauan</h5>
+                <h5 style="margin-right: auto">Daftar Pemantauan Pemudik</h5>
+                <div>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -71,6 +82,7 @@
                     <thead class="thead-light">
                     <tr>
                         <th>Nmr</th>
+                        <th>Aksi</th>
                         <th>Tanggal Pemantauan</th>
                         <th>Tanggal Tiba</th>
                         <th>Hari ke</th>
@@ -281,6 +293,32 @@
         ajax.send(formData);
     });
 
+    function deleteDataPemantauan(nik, tanggalPantau) {
+        const ajax = new XMLHttpRequest();
+        ajax.open('GET', '<?= $index_location ?>/services/pantau_pemudik.php?action=delete&nik=' + nik + '&tanggal_pantau=' + tanggalPantau);
+        ajax.onload = function() {
+            if(ajax.status === 200) {
+                try {
+                    const response = JSON.parse(ajax.responseText);
+                    if(response.code === 0) {
+                        $('#table-pantau-pemudik').DataTable().columns.adjust().draw();
+                        toastr.success("Berhasil menghapus data");
+                    } else {
+                        toastr.error('Terjadi kesalahan');
+                        console.log(ajax.responseText);
+                    }
+                } catch(e) {
+                    toastr.error('Terjadi kesalahan');
+                    console.log(ajax.responseText);
+                }
+            } else {
+                toastr.error('Terjadi kesalahan saat menghubungi server');
+                console.log(ajax.responseText);
+            }
+        }
+        ajax.send();
+    }
+
     function formatDate(date) {
         let d = new Date(date);
         let month = d.getMonth() + 1;
@@ -315,11 +353,14 @@
             "ajax": "services/DataTables/getPantauPemudik.php",
             "columns": [{
                 "orderable": false,
-                "data": null,
                 "defaultContent": ""
             },
             {
-                "data": "waktu_pantau"
+                "orderable": false,
+                "defaultContent": ""
+            },
+            {
+                "data": "tanggal_pantau"
             },
             {
                 "data": "tanggal_tiba"
@@ -353,7 +394,7 @@
             }
             ],
             "order": [
-                [1, 'asc']
+                [2, 'asc']
             ]
         });
 
@@ -363,6 +404,13 @@
                 order: 'applied'
             }).nodes().each(function (cell, i) {
                 cell.innerHTML = i + 1;
+            });
+
+            dt.column(1, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function (cell, i) {
+                cell.innerHTML = "<button type='button' class='btn btn-danger' onclick='deleteDataPemantauan(\"" + dt.cell(i, 5).data() + "\",\"" + dt.cell(i, 2).data() + "\")'><i class='fas fa-trash'></i></button>";
             });
         });
     };

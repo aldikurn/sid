@@ -83,12 +83,14 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             $response['message'] = "Data tidak lengkap";
         }
     } elseif ($_GET['action'] === 'delete') {
-        $stmt = $conn->prepare("DELETE FROM pemudik WHERE nik = ?");
-        $stmt->bind_param("s", $_GET['nik']);
-        $stmt->execute();
-        $stmt->close();
-        $response['code'] = 0;
-        $response['message'] = "Data penduduk berhasil dihapus berdasarkan nik";
+        if(isset($_GET['nik']) && isset($_GET['tanggal_pantau'])) {
+            $stmt = $conn->prepare("DELETE FROM pantau_pemudik WHERE nik = ? AND tanggal_pantau = ?");
+            $stmt->bind_param("ss", $_GET['nik'], $_GET['tanggal_pantau']);
+            $stmt->execute();
+            $stmt->close();
+            $response['code'] = 0;
+            $response['message'] = "Data penduduk berhasil dihapus berdasarkan nik";
+        }
     } else {
         $response['message'] = "Parameter tidak valid";
     }

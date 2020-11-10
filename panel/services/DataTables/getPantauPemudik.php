@@ -20,7 +20,7 @@ $columns = array(
         }
     ),
     array('db' => 'tanggal_tiba',   'dt' => 'tanggal_tiba'),
-    array('db' => 'waktu_pantau',   'dt' => 'waktu_pantau'),
+    array('db' => 'tanggal_pantau',   'dt' => 'tanggal_pantau'),
     array('db' => 'data_hari_ke',   'dt' => 'data_hari_ke'),
     array('db' => 'nik', 'dt' => 'nik'),
     array('db' => 'nama',   'dt' => 'nama'),
