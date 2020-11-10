@@ -75,7 +75,23 @@
                     <div class="col-md-12">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-daftar-pemudik" role="tabpanel" aria-labelledby="nav-home-tab">
-                                
+                            <table id="table-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nmr</th>
+                                    <th>Aksi</th>
+                                    <th>NIK</th>
+                                    <th>Nama</th>
+                                    <th>Kota Asal</th>
+                                    <th>Tujuan</th>
+                                    <th>Durasi</th>
+                                    <th>Status COVID19</th>
+                                    <th>Wajib Pantau</th>
+                                    <th>Keluhan Kesehatan</th>
+                                    <th>Tanggal Tiba</th>
+                                </tr>
+                            </thead>
+                        </table>
                             </div>
                             <div class="tab-pane fade" id="nav-tambah-pemudik" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <form id="tambahpemudik" action="" method="POST">
@@ -243,4 +259,101 @@
         form['wajib-pantau'].selectedIndex = 0;
         form['keluhan-kesehatan'].value = '';
     }
+
+    function deletePemudik(nik) {
+        const ajax = new XMLHttpRequest();
+        ajax.open('GET', '<?= $index_location ?>/services/pemudik.php?action=delete&nik=' + nik);
+        ajax.onload = function() {
+            if(ajax.status === 200) {
+                try {
+                    const response = JSON.parse(ajax.responseText);
+                    if(response.code === 0) {
+                        $('#table-pantau-pemudik').DataTable().columns.adjust().draw();
+                        toastr.success("Berhasil menghapus data");
+                    } else {
+                        toastr.error('Terjadi kesalahan');
+                        console.log(ajax.responseText);
+                    }
+                } catch(e) {
+                    toastr.error('Terjadi kesalahan');
+                    console.log(ajax.responseText);
+                }
+            } else {
+                toastr.error('Terjadi kesalahan saat menghubungi server');
+                console.log(ajax.responseText);
+            }
+        }
+        ajax.send();
+    }
+</script>
+
+<script>
+    let dt;
+
+    const refreshTablePantauPemudik = function () {
+        dt = $('#table-pemudik').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "scrollX" : true,
+            "lengthMenu": [10, 20],
+            "ajax": "services/DataTables/getPemudik.php",
+            "columns": [{
+                "orderable": false,
+                "defaultContent": ""
+            },
+            {
+                "orderable": false,
+                "defaultContent": ""
+            },
+            {
+                "data": "nik"
+            },
+            {
+                "data": "nama"
+            },
+            {
+                "data": "asal"
+            },
+            {
+                "data": "tujuan"
+            },
+            {
+                "data": "durasi"
+            },
+            {
+                "data": "status_covid19"
+            },
+            {
+                "data": "wajib_pantau"
+            },
+            {
+                "data": "keluhan_kesehatan"
+            },
+            {
+                "data": "tanggal_tiba"
+            }
+            ],
+            "order": [
+                [2, 'asc']
+            ]
+        });
+
+        dt.on('draw', function () {
+            dt.column(0, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+
+            dt.column(1, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function (cell, i) {
+                cell.innerHTML = "<button type='button' class='btn btn-danger' onclick='deletePemudik(\"" + dt.cell(i, 2).data() + "\")'><i class='fas fa-trash'></i></button>";
+            });
+        });
+    };
+
+    $(document).ready(refreshTablePantauPemudik);
 </script>

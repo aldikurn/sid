@@ -78,25 +78,25 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <table id="table-pantau-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
-                    <thead class="thead-light">
-                    <tr>
-                        <th>Nmr</th>
-                        <th>Aksi</th>
-                        <th>Tanggal Pemantauan</th>
-                        <th>Tanggal Tiba</th>
-                        <th>Hari ke</th>
-                        <th>NIK</th>
-                        <th>Nama</th>
-                        <th>Suhu Tubuh</th>
-                        <th>Batuk</th>
-                        <th>Flu</th>
-                        <th>Sesak Nafas</th>
-                        <th>Keluhan Lain</th>
-                        <th>Status COVID19</th>
-                    </tr>
-                    </thead>
-                </table>
+                        <table id="table-pantau-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nmr</th>
+                                    <th>Aksi</th>
+                                    <th>Tanggal Pemantauan</th>
+                                    <th>Tanggal Tiba</th>
+                                    <th>Hari ke</th>
+                                    <th>NIK</th>
+                                    <th>Nama</th>
+                                    <th>Suhu Tubuh</th>
+                                    <th>Batuk</th>
+                                    <th>Flu</th>
+                                    <th>Sesak Nafas</th>
+                                    <th>Keluhan Lain</th>
+                                    <th>Status COVID19</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                     <!-- /.col -->
                 </div>
