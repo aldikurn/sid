@@ -224,6 +224,7 @@
                         let response = JSON.parse(xhr.responseText);
                         if(response.code === 0) {
                             resetForm();
+                            $('#table-pemudik').DataTable().columns.adjust().draw();
                             toastr.success('Berhasil menambahkan data pemudik');
                         } else {
                             toastr.error("Terjadi Kesalahan")
@@ -268,7 +269,7 @@
                 try {
                     const response = JSON.parse(ajax.responseText);
                     if(response.code === 0) {
-                        $('#table-pantau-pemudik').DataTable().columns.adjust().draw();
+                        $('#table-pemudik').DataTable().columns.adjust().draw();
                         toastr.success("Berhasil menghapus data");
                     } else {
                         toastr.error('Terjadi kesalahan');

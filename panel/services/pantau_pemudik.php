@@ -43,7 +43,7 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
         $data = array();
 
         $data['nik'] = $_POST['nik'];
-        $data['waktu_pantau'] = $_POST['tanggal_pemantauan'];
+        $data['tanggal_pantau'] = $_POST['tanggal_pemantauan'];
         $data['suhu_tubuh'] = $_POST['suhu-tubuh'];
         if(isset($_POST['batuk'])) {
             $data['batuk'] = 'ya';
@@ -71,8 +71,8 @@ if (isset($_GET['action']) && isset($_GET['nik'])) {
             }
         }
         if ($dataLengkap) {
-            $stmt = $conn->prepare("INSERT INTO pantau_pemudik(nik, waktu_pantau, suhu_tubuh, batuk, flu, sesak_nafas, keluhan_lain) VALUES(?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssissss", $data['nik'], $data['waktu_pantau'], $data['suhu_tubuh'], $data['batuk'], $data['flu'], $data['sesak_nafas'], $data['keluhan_lain']);
+            $stmt = $conn->prepare("INSERT INTO pantau_pemudik(nik, tanggal_pantau, suhu_tubuh, batuk, flu, sesak_nafas, keluhan_lain) VALUES(?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssissss", $data['nik'], $data['tanggal_pantau'], $data['suhu_tubuh'], $data['batuk'], $data['flu'], $data['sesak_nafas'], $data['keluhan_lain']);
             $stmt->execute();
             $stmt->close();
 
