@@ -1,3 +1,6 @@
+<?php
+include_once('../panel/services/info_desa.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +11,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../dependencies/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../dependencies/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../dependencies/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../dependencies/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dependencies/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../dependencies/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
@@ -41,13 +44,12 @@
     </style>
 </head>
 <body class="hold-transition login-page">
-<div class="bg-login" style="position:absolute; background-image:url(../assets/images/background-login.jpg); background-size: cover; filter: blur(8px);"></div>
 <div class="login-box">
     <figure class="logo-desa">
-        <img src="../assets/images/logo-desa/logo-desa.png">
+        <img src="../panel/assets/images/logo-desa/logo-desa.png">
     </figure>
   <div class="login-logo">
-    <a href="#"><b>Sistem Informasi Desa</b> Sugihwaras</a>
+    <a href="#"><b>Sistem Informasi Desa </b><?= $info_desa['nama'] ?></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -94,11 +96,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../dependencies/plugins/jquery/jquery.min.js"></script>
+<script src="../dependencies/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../dependenciesplugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../dependencies/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../dependenciesdist/js/adminlte.min.js"></script>
+<script src="../dependencies/dist/js/adminlte.min.js"></script>
 
 </body>
 </html>
