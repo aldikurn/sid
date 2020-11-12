@@ -65,7 +65,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 style="margin-right: auto">Daftar Pemantauan Pemudik</h5>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="float: left;">
+                        <a class="nav-item nav-link active" id="nav-daftar-pantau-pemudik-tab" data-toggle="tab" href="#nav-daftar-pantau-pemudik" role="tab" aria-controls="nav-home" aria-selected="true">Daftar Pemantauan</a>
+                        <a class="nav-item nav-link" id="nav-tambah-pantau-pemudik-tab" data-toggle="tab" href="#nav-tambah-pantau-pemudik" role="tab" aria-controls="nav-profile" aria-selected="false">Tambah Pemantauan</a>
+                    </div>
+                </nav>
                 <div>
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
                     </button>
@@ -78,25 +83,79 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="table-pantau-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Nmr</th>
-                                    <th>Aksi</th>
-                                    <th>Tanggal Pemantauan</th>
-                                    <th>Tanggal Tiba</th>
-                                    <th>Hari ke</th>
-                                    <th>NIK</th>
-                                    <th>Nama</th>
-                                    <th>Suhu Tubuh</th>
-                                    <th>Batuk</th>
-                                    <th>Flu</th>
-                                    <th>Sesak Nafas</th>
-                                    <th>Keluhan Lain</th>
-                                    <th>Status COVID19</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-daftar-pantau-pemudik" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <table id="table-pantau-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Nmr</th>
+                                            <th>Aksi</th>
+                                            <th>Tanggal Pemantauan</th>
+                                            <th>Tanggal Tiba</th>
+                                            <th>Hari ke</th>
+                                            <th>NIK</th>
+                                            <th>Nama</th>
+                                            <th>Suhu Tubuh</th>
+                                            <th>Batuk</th>
+                                            <th>Flu</th>
+                                            <th>Sesak Nafas</th>
+                                            <th>Keluhan Lain</th>
+                                            <th>Status COVID19</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="nav-tambah-pantau-pemudik" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <form id="formTambahDataPemantauan" method="post" action="">
+                                    <div class="form-group" id="fg-nik">
+                                        <label>Pilih Pemudik</label>
+                                        <select name="nik" id="nik" class="form-control" required>
+                                            <option value="">Pilih Pemudik</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="fg-tanggal-pemantauan">
+                                        <label>Tanggal Pemantauan</label>
+                                        <input type="datetime-local" name="tanggal_pemantauan" class="form-control" required>
+                                    </div>
+                                    <div class="form-group" id="fg-tanggal-tiba">
+                                        <label>Tanggal Tiba</label>
+                                        <input type="text" name="tanggal_tiba" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group" id="fg-data-hari-ke">
+                                        <label>Data Hari ke-</label>
+                                        <input type="text" name="data-hari-ke" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group" id="fg-suhu-tubuh">
+                                        <label>Suhu Tubuh</label>
+                                        <input type="number" name="suhu-tubuh" class="form-control" placeholder="36" min="20" max="50" required>
+                                    </div>
+                                    <div class="form-group" id="fg-kondisi">
+                                        <label>Kondisi Kesehatan</label>
+                                        <div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="ya" id="batuk" name="batuk">
+                                                <label class="form-check-label" for="batuk">Batuk</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="ya" id="flu" name="flu">
+                                                <label class="form-check-label" for="flu">Flu</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="ya" id="sesak-nafas" name="sesak-nafas">
+                                                <label class="form-check-label" for="sesak-nafas">Sesak Nafas</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="fg-keluhan-lain">
+                                        <label>Keluhan Lain</label>
+                                        <textarea name="keluhan-lain" id="keluhan-lain" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group" id="fg-submit">
+                                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -108,78 +167,6 @@
     </div>
     <!-- /.col -->
 </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card collapsed-card">
-            <div class="card-header">
-                <h5 style="margin-right: auto">Tambah data pemantauan</h5>
-                <div>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <form id="formTambahDataPemantauan" method="post" action="">
-                    <div class="form-group" id="fg-nik">
-                        <label>Pilih Pemudik</label>
-                        <select name="nik" id="nik" class="form-control" required>
-                            <option value="">Pilih Pemudik</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="fg-tanggal-pemantauan">
-                        <label>Tanggal Pemantauan</label>
-                        <input type="datetime-local" name="tanggal_pemantauan" class="form-control" required>
-                    </div>
-                    <div class="form-group" id="fg-tanggal-tiba">
-                        <label>Tanggal Tiba</label>
-                        <input type="text" name="tanggal_tiba" class="form-control" disabled>
-                    </div>
-                    <div class="form-group" id="fg-data-hari-ke">
-                        <label>Data Hari ke-</label>
-                        <input type="text" name="data-hari-ke" class="form-control" disabled>
-                    </div>
-                    <div class="form-group" id="fg-suhu-tubuh">
-                        <label>Suhu Tubuh</label>
-                        <input type="number" name="suhu-tubuh" class="form-control" placeholder="36" min="20" max="50" required>
-                    </div>
-                    <div class="form-group" id="fg-kondisi">
-                        <label>Kondisi Kesehatan</label>
-                        <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ya" id="batuk" name="batuk">
-                                <label class="form-check-label" for="batuk">Batuk</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ya" id="flu" name="flu">
-                                <label class="form-check-label" for="flu">Flu</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ya" id="sesak-nafas" name="sesak-nafas">
-                                <label class="form-check-label" for="sesak-nafas">Sesak Nafas</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" id="fg-keluhan-lain">
-                        <label>Keluhan Lain</label>
-                        <textarea name="keluhan-lain" id="keluhan-lain" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group" id="fg-submit">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
-                    </div>
-                </form>
-            </div>
-            <!-- ./card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-
 
 <script>
     let xhr = new XMLHttpRequest();
