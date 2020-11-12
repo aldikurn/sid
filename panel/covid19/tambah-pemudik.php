@@ -76,22 +76,22 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-daftar-pemudik" role="tabpanel" aria-labelledby="nav-home-tab">
                             <table id="table-pemudik" class="table table-bordered table-hover" style="min-width: 100%">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Nmr</th>
-                                    <th>Aksi</th>
-                                    <th>NIK</th>
-                                    <th>Nama</th>
-                                    <th>Kota Asal</th>
-                                    <th>Tujuan</th>
-                                    <th>Durasi</th>
-                                    <th>Status COVID19</th>
-                                    <th>Wajib Pantau</th>
-                                    <th>Keluhan Kesehatan</th>
-                                    <th>Tanggal Tiba</th>
-                                </tr>
-                            </thead>
-                        </table>
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Nmr</th>
+                                        <th>Aksi</th>
+                                        <th>NIK</th>
+                                        <th>Nama</th>
+                                        <th>Kota Asal</th>
+                                        <th>Tujuan</th>
+                                        <th>Durasi</th>
+                                        <th>Status COVID19</th>
+                                        <th>Wajib Pantau</th>
+                                        <th>Keluhan Kesehatan</th>
+                                        <th>Tanggal Tiba</th>
+                                    </tr>
+                                </thead>
+                            </table>
                             </div>
                             <div class="tab-pane fade" id="nav-tambah-pemudik" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <form id="tambahpemudik" action="" method="POST">
