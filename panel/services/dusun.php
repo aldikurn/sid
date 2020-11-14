@@ -24,6 +24,11 @@ if(isset($_GET['action'])) {
             $response['data'] = $result->fetch_assoc();
             $response['code'] = 0;
             $response['message'] = 'Berhasil mengambil data';
+        } else {
+            $result = $conn->query('SELECT * FROM dusun');
+            $response['data'] = $result->fetch_all(MYSQLI_ASSOC);
+            $response['code'] = 0;
+            $response['message'] = 'Berhasil mengambil data';
         }
     } elseif($_GET['action'] === 'insert') {
         $stmt = $conn->prepare('INSERT INTO dusun(nama, nik_kepala_dusun) VALUES(?, ?)');
