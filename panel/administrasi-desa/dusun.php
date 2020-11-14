@@ -162,7 +162,7 @@
                         dusunForm['nama_kepala_dusun'].value = response.data.nama_kepala_dusun;
                     } else {
                         toastr.error('Terjadi Kesalahan');
-                        console.log(ajax.resonseText);
+                        console.log(ajax.responseText);
                     }
                 } catch(e) {
                     toastr.error('Terjadi Kesalahan');
@@ -171,7 +171,7 @@
                 }
             } else {
                 toastr.error('Masalah sambungan ke server');
-                console.log(ajax.resonseText);
+                console.log(ajax.responseText);
             }
         }
         ajax.send();
@@ -210,18 +210,19 @@
                         $('#dusun-modal').modal('hide');
                         $('#table-dusun').DataTable().ajax.reload();
                         toastr.success(response.message);
+                        getDusunListRWForm();
                     } else {
                         toastr.error('Terjadi Kesalahan');
-                        console.log(ajax.resonseText);
+                        console.log(ajax.responseText);
                     }
                 } catch(e) {
                     toastr.error('Terjadi Kesalahan');
                     console.log(e.message);
-                    console.log(ajax.resonseText);
+                    console.log(ajax.responseText);
                 }
             } else {
                 toastr.error('Masalah sambungan ke server');
-                console.log(ajax.resonseText);
+                console.log(ajax.responseText);
             }
         };
         const formData = new FormData(document.getElementById('dusun-form'));
@@ -371,13 +372,13 @@
                                     </div>
                                     <div class="form-group" id="fg-pilih-dusun">
                                         <label>Pilih Dusun</label>
-                                        <select class="form-control" name="pilih-dusun" required>
+                                        <select class="form-control" name="dusun" required>
                                             <option value="">Pilih dusun</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="fg-nomor-rw">
                                         <label>Nomor RW</label>
-                                        <input type="number" class="form-control" placeholder="Nomor rw" name="nomor_rw" required>
+                                        <input type="number" class="form-control" placeholder="Nomor rw" name="nomor" required>
                                     </div>
                                 </form>
                             </div>
@@ -465,10 +466,10 @@
                     if(response.code === 0) {
                         rwForm['nik_kepala_rw'].value = response.data.nik_kepala_rw;
                         rwForm['nama_kepala_rw'].value = response.data.nama_kepala_rw;
-                        rwForm['nomor_rw'].value = response.data.nomor_rw;
+                        rwForm['nomor'].value = response.data.nomor_rw;
                     } else {
                         toastr.error('Terjadi Kesalahan');
-                        console.log(ajax.resonseText);
+                        console.log(ajax.responseText);
                     }
                 } catch(e) {
                     toastr.error('Terjadi Kesalahan');
@@ -477,7 +478,7 @@
                 }
             } else {
                 toastr.error('Masalah sambungan ke server');
-                console.log(ajax.resonseText);
+                console.log(ajax.responseText);
             }
         }
         ajax.send();
@@ -489,9 +490,10 @@
     }
 
     function rwFormOK() {
-        return rwForm['nama_rw'].value !== '' &&
-            rwForm['nik_kepala_rw'].value !== '' &&
-            rwForm['nama_kepala_rw'].value !== '---';
+        return rwForm['nik_kepala_rw'].value !== '' &&
+            rwForm['nama_kepala_rw'].value !== '---' &&
+            rwForm['nomor'].value !== '';
+            
     }
 
     document.getElementById('rw-form').addEventListener('submit', function(event) {
@@ -503,9 +505,9 @@
         }
 
         const ajax = new XMLHttpRequest();
-        if(rwModalAction === 'insert') {
+        if(RWModalAction === 'insert') {
             ajax.open('POST', '<?= $index_location ?>/services/rw.php?action=insert');
-        } else if(rwModalAction === 'update') {
+        } else if(RWModalAction === 'update') {
             ajax.open('POST', '<?= $index_location ?>/services/rw.php?action=update&id_rw=' + idRWToEdit);
         }
         ajax.onload = function() {
@@ -518,16 +520,16 @@
                         toastr.success(response.message);
                     } else {
                         toastr.error('Terjadi Kesalahan');
-                        console.log(ajax.resonseText);
+                        console.log(ajax.responseText);
                     }
                 } catch(e) {
                     toastr.error('Terjadi Kesalahan');
                     console.log(e.message);
-                    console.log(ajax.resonseText);
+                    console.log(ajax.responseText);
                 }
             } else {
                 toastr.error('Masalah sambungan ke server');
-                console.log(ajax.resonseText);
+                console.log(ajax.responseText);
             }
         };
         const formData = new FormData(document.getElementById('rw-form'));
@@ -579,6 +581,42 @@
         })
     }
 
+    function getDusunListRWForm() {
+        const ajax = new XMLHttpRequest();
+        ajax.open('GET', 'services/dusun.php?action=select');
+        ajax.onload = function() {
+            if(ajax.status === 200) {
+                try {
+                    const response = JSON.parse(ajax.responseText);
+                    if(response.code === 0) {
+                        const select = rwForm['dusun'];
+                        const len = select.options.length;
+                        for(i = len - 1; i > 0; i--) {
+                            select.remove(i);
+                        }
+                        response.data.forEach((v) => {
+                            const option = document.createElement('option');
+                            option.value = v.id;
+                            option.textContent = v.nama;
+                            select.add(option);
+                        });
+                    } else {
+                        console.log(ajax.responseText);
+                        toastr.error('Terjadi Kesalahan');
+                    }
+                } catch(e) {
+                    console.log(e.message);
+                    toastr.error('Terjadi kesalahan');
+                    console.log(ajax.responseText);
+                }
+            } else {
+                toastr.error('Terjadi kesalahan sambungan ke server')
+                console.log(ajax.responseText);
+            }
+        };
+        ajax.send();
+    }
+
     function initRW() {
         let dt = $('#table-rw').DataTable({
             "ajax": "services/DataTables/getrw.php",
@@ -617,7 +655,7 @@
                 search: 'applied',
                 order: 'applied'
             }).nodes().each(function (cell, i) {
-                cell.innerHTML = "<button type='button' data-toggle='modal' class='btn btn-sm btn-warning' onclick='editRW(\"" + dt.ajax.json().data[i].id + "\")' style=\"margin-right: 0.7em\"><i class='fas fa-edit'></i></button><button type='button' class='btn btn-sm btn-danger' onclick='deleteDusun(\"" + dt.ajax.json().data[i].id + "\")'><i class='fas fa-trash'></i></button>";
+                cell.innerHTML = "<button type='button' data-toggle='modal' class='btn btn-sm btn-warning' onclick='editRW(\"" + dt.ajax.json().data[i].id + "\")' style=\"margin-right: 0.7em\"><i class='fas fa-edit'></i></button><button type='button' class='btn btn-sm btn-danger' onclick='deleteRW(\"" + dt.ajax.json().data[i].id + "\")'><i class='fas fa-trash'></i></button>";
             });
         });
     }
@@ -629,5 +667,6 @@
     $(document).ready(function() {
         initDusun();
         initRW();
+        getDusunListRWForm();
     });
 </script>
