@@ -26,7 +26,7 @@
     margin-right: 0.9em;
 }
 
-.dt-btn-row-detail, .dt-btn-row-detail:hover, .dt-btn-row-detail:active {
+.btn-warning, .btn-warning:hover, .btn-warning:active {
     color: white !important;
 }
 
