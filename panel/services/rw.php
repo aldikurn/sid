@@ -13,6 +13,7 @@ if(isset($_GET['action'])) {
                     rw.id,
                     rw.nik_kepala_rw,
                     penduduk.nama nama_kepala_rw,
+                    dusun.id  id_dusun,
                     dusun.nama nama_dusun,
                     rw.nomor nomor_rw
                 FROM rw
@@ -26,6 +27,11 @@ if(isset($_GET['action'])) {
             $stmt->execute();
             $result = $stmt->get_result();
             $response['data'] = $result->fetch_assoc();
+            $response['code'] = 0;
+            $response['message'] = 'Berhasil mengambil data';
+        } else {
+            $result = $conn->query('SELECT * FROM rw');
+            $response['data'] = $result->fetch_all(MYSQLI_ASSOC);
             $response['code'] = 0;
             $response['message'] = 'Berhasil mengambil data';
         }
