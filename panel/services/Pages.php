@@ -19,7 +19,7 @@ $pages = array(
     new PageReferenceComposite('Administrasi Desa', 'nav-icon fas fa-toolbox',
         array(
             new PageReference('Identitas Desa', 'administrasi-desa/identitas-desa.php', 'fas fa-id-card nav-icon'),
-            new PageReference('Dusun', 'administrasi-desa/dusun.php', 'fas fa-map nav-icon'),
+            new PageReference('Daftar Dusun', 'administrasi-desa/dusun.php', 'fas fa-map nav-icon'),
             new PageReference('Perangkat Desa', 'administrasi-desa/perangkat-desa.php', 'fas fa-user-tie nav-icon')
         )
     ),
