@@ -55,9 +55,9 @@ SELECT
 Daftar Kepala Dusun (JOIN 2 Tabel)
 ---------------------------------
 SELECT
+	dusun.nama as nama_dusun,
 	dusun.nik_kepala_dusun as nik_kepala_dusun,
-	penduduk.nama as nama_kepala_dusun,
-	dusun.nama as nama_dusun
+	penduduk.nama as nama_kepala_dusun
 FROM dusun
 INNER JOIN penduduk
 	ON penduduk.nik = dusun.nik_kepala_dusun
