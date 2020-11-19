@@ -34,7 +34,7 @@ $pages = array(
             new PageReference('Hubungan dalam KK', 'statistik-penduduk/hubungan-dalam-kk.php', 'far fa-circle nav-icon')
         )
     ),
-    new PageReference('Laporan Bulanan', 'laporan-bulanan/laporan-bulanan.php', 'fas fa-file-medical-alt nav-icon'),
+    //new PageReference('Laporan Bulanan', 'laporan-bulanan/laporan-bulanan.php', 'fas fa-file-medical-alt nav-icon'),
     new PageReference('History Aktivitas', 'history-aktifitas/history-aktifitas.php', 'nav-icon fas fa-history')
 );
 
