@@ -62,7 +62,7 @@ function printSideBarMenu($pages)
     foreach ($pages as $page) :
         if ($page instanceof PageReferenceComposite) {
 ?>
-            <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview menu-open">
                 <a href="" class="nav-link <?= isActive($page->subMenu) ? 'active' : '' ?>">
                     <i class="<?= $page->icon ?>"></i>
                     <p>
