@@ -102,7 +102,7 @@ curl_close($ch);
             text: 'Statistik Pekerjaan di Desa Sugihwaras'
         },
         series: [{
-            name: 'Brands',
+            name: 'Jumlah',
             colorByPoint: true,
             data: pekerjaan
         }]
