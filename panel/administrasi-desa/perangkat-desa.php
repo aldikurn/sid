@@ -10,7 +10,7 @@
                 <nav class="card-title">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist" style="float: left;">
                         <a class="nav-item nav-link active" id="nav-daftar-perangkat-desa-tab" data-toggle="tab" href="#nav-daftar-perangkat-desa" role="tab" aria-controls="nav-home" aria-selected="true">Daftar Perangkat Desa</a>
-                        <a class="nav-item nav-link" id="nav-form-perangkat-desa-tab" data-toggle="tab" href="#nav-form-perangkat-desa" role="tab" aria-controls="nav-profile" aria-selected="false">Tambah Perangkat Desa</a>
+                        <a class="nav-item nav-link d-none" id="nav-form-perangkat-desa-tab" data-toggle="tab" href="#nav-form-perangkat-desa" role="tab" aria-controls="nav-profile" aria-selected="false">Tambah Perangkat Desa</a>
                     </div>
                 </nav>
                 <div class="card-tools">
@@ -68,7 +68,7 @@
                                 <input type="date" class="form-control" name="tanggal_pengangkatan" required>
                             </div>
                             <div class="form-group" id="fg-masa">
-                                <label>Masa Jabatan</label>
+                                <label>Masa Jabatan (Tahun)</label>
                                 <input type="number" class="form-control" placeholder="0" name="masa_jabatan" required>
                             </div>
                             <div class="form-group" id="fg-status">
@@ -79,8 +79,9 @@
                                     <option value="Tidak Aktif">Tidak Aktif</option>
                                 </select>
                             </div>
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-default" onclick="closeForm()"><i class="fas fa-times"></i> Batal</a>
+                                <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
                             </div>
                         </form>
                     </div>
@@ -93,6 +94,11 @@
 <script>
     let form = document.forms['form-perangkat-desa'];
 
+    function closeForm() {
+        document.getElementById('nav-daftar-perangkat-desa-tab').click();
+        document.getElementById('nav-form-perangkat-desa-tab').classList.add('d-none');
+    }
+
     document.getElementById('insert-button').addEventListener('click', function(event) {
         showForm('insert');
     });
@@ -101,22 +107,103 @@
         showForm('edit', nik);
     }
 
+    let formAction;
+    let lastNIK = null;
+
     function showForm(action, nik = null) {
         let navTabTitle;
+        let submitClassList;
         let submitIcon;
         let submitText;
 
-        if(action === 'insert') {
-
-        } else if(action === 'edit') {
-             
+        if(lastNIK !== nik) {
+            form.reset();
         }
+        formAction = action;
+        lastNIK = nik;
+
+        if(action === 'insert') {
+            navTabTitle = 'Tambah perangkat desa';
+            submitClassList = 'btn btn-success'
+            submitIcon = 'fas fa-save';
+            submitText = 'Simpan';
+        } else if(action === 'edit') {
+            navTabTitle = 'Ubah perangkat desa';
+            submitClassList = 'btn btn-warning'
+            submitIcon = 'fas fa-edit';
+            submitText = 'Ubah';
+
+            const ajax = new XMLHttpRequest();
+            ajax.open('GET', 'services/perangkat-desa.php?action=select&nik=' + nik);
+            ajax.onload = function() {
+                if(ajax.status == 200) {
+                    try {
+                        let response = JSON.parse(ajax.responseText);
+                        if(response.code === 0) {
+                            form['nik'].value = response.data[0].nik;
+                            form['nip'].value = response.data[0].nip;
+                            form['nama'].value = response.data[0].nama;
+                            form['jabatan'].value = response.data[0].jabatan;
+                            form['tanggal_pengangkatan'].value = response.data[0].tanggal_pengangkatan;
+                            form['masa_jabatan'].value = response.data[0].masa_jabatan;
+                            form['status'].value = response.data[0].status;
+                            
+                        } else {
+                            toastr.error("Data tidak ditemukan")
+                            console.log(ajax.responseText);
+                        }
+                    } catch (e) {
+                        toastr.error("Terjadi Kesalahan")
+                        console.log(ajax.responseText);
+                        console.log(e.message);
+                    }
+                } else {
+                    toastr.error("Kesalahan sambungan ke server")
+                    console.log(ajax.responseText);
+                }
+            }
+            ajax.send();
+        }
+
+        document.getElementById('nav-form-perangkat-desa-tab').textContent = navTabTitle;
+        document.getElementById('nav-form-perangkat-desa-tab').classList.remove('d-none');
+        document.getElementById('nav-form-perangkat-desa-tab').click();
+        form['submit'].innerHTML = `<i class="${submitIcon}"></i> ${submitText}`;
     }
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         
-
+        const ajax = new XMLHttpRequest();
+        if(formAction === 'insert') {
+            ajax.open('POST', 'services/perangkat-desa.php?action=insert');
+        } else if(formAction === 'edit') {
+            ajax.open('POST', 'services/perangkat-desa.php?action=update&nik=' + form['nik'].value);
+        }
+        ajax.onload = function() {
+            if(ajax.status == 200) {
+                    try {
+                        let response = JSON.parse(ajax.responseText);
+                        if(response.code === 0) {
+                            $('#table-perangkat-desa').DataTable().ajax.reload();
+                            toastr.success(response.message);
+                            closeForm();                            
+                        } else {
+                            toastr.error(response.message)
+                            console.log(ajax.responseText);
+                        }
+                    } catch (e) {
+                        toastr.error("Terjadi Kesalahan")
+                        console.log(ajax.responseText);
+                        console.log(e.message);
+                    }
+                } else {
+                    toastr.error("Kesalahan sambungan ke server")
+                    console.log(ajax.responseText);
+                }
+        }
+        const formData = new FormData(form);
+        ajax.send(formData);
     });
 
     form['nik'].addEventListener('keypress', function(event) {
