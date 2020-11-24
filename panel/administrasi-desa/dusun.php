@@ -96,7 +96,7 @@
 
     function cekNIKDusun() {
         const ajax = new XMLHttpRequest();
-        ajax.open('GET', '<?= $index_location ?>/services/penduduk.php?action=select&nik=' + dusunForm['nik_kepala_dusun'].value);
+        ajax.open('GET', 'services/penduduk.php?action=select&nik=' + dusunForm['nik_kepala_dusun'].value);
         ajax.onload = function() {
             if(ajax.status == 200) {
                 try {
@@ -198,9 +198,9 @@
 
         const ajax = new XMLHttpRequest();
         if(dusunModalAction === 'insert') {
-            ajax.open('POST', '<?= $index_location ?>/services/dusun.php?action=insert');
+            ajax.open('POST', 'services/dusun.php?action=insert');
         } else if(dusunModalAction === 'update') {
-            ajax.open('POST', '<?= $index_location ?>/services/dusun.php?action=update&nama_dusun=' + namaDusunToEdit);
+            ajax.open('POST', 'services/dusun.php?action=update&nama_dusun=' + namaDusunToEdit);
         }
         ajax.onload = function() {
             if(ajax.status === 200) {
@@ -403,7 +403,7 @@
 
     function cekNIKRW() {
         const ajax = new XMLHttpRequest();
-        ajax.open('GET', '<?= $index_location ?>/services/penduduk.php?action=select&nik=' + rwForm['nik_kepala_rw'].value);
+        ajax.open('GET', 'services/penduduk.php?action=select&nik=' + rwForm['nik_kepala_rw'].value);
         ajax.onload = function() {
             if(ajax.status == 200) {
                 try {
@@ -508,9 +508,9 @@
 
         const ajax = new XMLHttpRequest();
         if(RWModalAction === 'insert') {
-            ajax.open('POST', '<?= $index_location ?>/services/rw.php?action=insert');
+            ajax.open('POST', 'services/rw.php?action=insert');
         } else if(RWModalAction === 'update') {
-            ajax.open('POST', '<?= $index_location ?>/services/rw.php?action=update&id_rw=' + idRWToEdit);
+            ajax.open('POST', 'services/rw.php?action=update&id_rw=' + idRWToEdit);
         }
         ajax.onload = function() {
             if(ajax.status === 200) {
@@ -759,7 +759,7 @@
 
     function cekNIKRT() {
         const ajax = new XMLHttpRequest();
-        ajax.open('GET', '<?= $index_location ?>/services/penduduk.php?action=select&nik=' + rtForm['nik_kepala_rt'].value);
+        ajax.open('GET', 'services/penduduk.php?action=select&nik=' + rtForm['nik_kepala_rt'].value);
         ajax.onload = function() {
             if(ajax.status == 200) {
                 try {
@@ -865,9 +865,9 @@
 
         const ajax = new XMLHttpRequest();
         if(RTModalAction === 'insert') {
-            ajax.open('POST', '<?= $index_location ?>/services/rt.php?action=insert');
+            ajax.open('POST', 'services/rt.php?action=insert');
         } else if(RTModalAction === 'update') {
-            ajax.open('POST', '<?= $index_location ?>/services/rt.php?action=update&id_rt=' + idRTToEdit);
+            ajax.open('POST', 'services/rt.php?action=update&id_rt=' + idRTToEdit);
         }
         ajax.onload = function() {
             if(ajax.status === 200) {

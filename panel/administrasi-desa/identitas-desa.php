@@ -128,7 +128,7 @@
         event.preventDefault();
 
         const ajax = new XMLHttpRequest();
-        ajax.open('POST', '<?= $index_location ?>/services/identitas-desa.php?action=upload_logo');
+        ajax.open('POST', 'services/identitas-desa.php?action=upload_logo');
         ajax.onload = function() {
             if(ajax.status === 200) {
                 try {
@@ -177,7 +177,7 @@
 
         const formData = new FormData(form);
         const ajax = new XMLHttpRequest();
-        ajax.open('POST', '<?= $index_location ?>/services/identitas-desa.php?action=update');
+        ajax.open('POST', 'services/identitas-desa.php?action=update');
         ajax.onload = function() {
             if(ajax.status === 200) {
                 try {
@@ -215,7 +215,7 @@
 
     function getFormData() {
         const ajax = new XMLHttpRequest();
-        ajax.open('GET', '<?= $index_location ?>/services/identitas-desa.php?action=select');
+        ajax.open('GET', 'services/identitas-desa.php?action=select');
         ajax.onload = function() {
             if(ajax.status === 200) {
                 try {

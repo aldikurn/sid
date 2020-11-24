@@ -170,7 +170,7 @@
 
 <script>
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?= $index_location ?>/services/pemudik.php?action=select&nik=all&wajib_pantau=1');
+    xhr.open('GET', 'services/pemudik.php?action=select&nik=all&wajib_pantau=1');
     xhr.onload = function() {
         if(xhr.status === 200) {
             try {
@@ -206,7 +206,7 @@
     form['nik'].addEventListener('change', function(event) {
         if(this.value !== '') {
             let ajax = new XMLHttpRequest();
-            ajax.open('GET', '<?= $index_location ?>/services/pemudik.php?action=select&nik=' + this.value);
+            ajax.open('GET', 'services/pemudik.php?action=select&nik=' + this.value);
             ajax.onload = function() {
                 if(ajax.status === 200) {
                     try {
@@ -252,7 +252,7 @@
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const ajax = new XMLHttpRequest();
-        ajax.open('POST', '<?= $index_location ?>/services/pantau_pemudik.php?action=insert&nik=' + form['nik'].value);
+        ajax.open('POST', 'services/pantau_pemudik.php?action=insert&nik=' + form['nik'].value);
         ajax.onload = function() {
             if(xhr.status === 200) {
                 try {
@@ -282,7 +282,7 @@
 
     function deleteDataPemantauan(nik, tanggalPantau) {
         const ajax = new XMLHttpRequest();
-        ajax.open('GET', '<?= $index_location ?>/services/pantau_pemudik.php?action=delete&nik=' + nik + '&tanggal_pantau=' + tanggalPantau);
+        ajax.open('GET', 'services/pantau_pemudik.php?action=delete&nik=' + nik + '&tanggal_pantau=' + tanggalPantau);
         ajax.onload = function() {
             if(ajax.status === 200) {
                 try {

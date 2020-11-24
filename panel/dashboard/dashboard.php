@@ -229,7 +229,7 @@ include_once('services/dashboard.php');
     Highcharts.chart('container', {
 
         data: {
-            csvURL: '<?= $index_location; ?>/services/HighCharts/getStatistikCovid19Indonesia.php',
+            csvURL: window.location.href + 'services/HighCharts/getStatistikCovid19Indonesia.php',
             beforeParse: function (csv) {
                 return csv.replace(/\n\n/g, '\n');
             }

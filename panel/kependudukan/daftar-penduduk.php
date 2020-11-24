@@ -529,7 +529,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                     document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = -1;
                 }, 100);
             };
-            ajax.open("GET", "<?= $index_location ?>/services/penduduk.php?action=select&nik=" + data);
+            ajax.open("GET", "services/penduduk.php?action=select&nik=" + data);
             ajax.send();
             document.querySelector('#modal-loading-tambah-data-penduduk').style.zIndex = 1;
         }
@@ -583,9 +583,9 @@ include_once ('services/getRequiredFormPenduduk.php');
         let form = document.querySelector('#formTambahDataPenduduk');
         const ajax = new XMLHttpRequest();
         if(lastAction ==='insert') {
-            ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=insert&nik=" + form['nik'].value);
+            ajax.open("POST", "services/penduduk.php?action=insert&nik=" + form['nik'].value);
         } else {
-            ajax.open("POST", "<?= $index_location ?>/services/penduduk.php?action=update&nik=" + lastNikToEdit);
+            ajax.open("POST", "services/penduduk.php?action=update&nik=" + lastNikToEdit);
         }
 
         ajax.onload = function () {
@@ -673,7 +673,7 @@ include_once ('services/getRequiredFormPenduduk.php');
                 });
             }
         }
-        xhr.open('GET', '<?= $index_location ?>/services/penduduk.php?action=delete&nik=' + idToDelete);
+        xhr.open('GET', 'services/penduduk.php?action=delete&nik=' + idToDelete);
         xhr.send();
     }
 </script>

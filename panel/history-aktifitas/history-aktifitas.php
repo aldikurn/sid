@@ -15,7 +15,7 @@
                 <i class="fas fa-user-tie bg-blue"></i>
                 <div class="timeline-item">
                     <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                    <h3 class="timeline-header no-border"><a href="#">Admin</a> Menambahkan data penduduk</h3>
+                    <h3 class="timeline-header no-border"><strong>Admin</strong></h3>
                     <div class="timeline-body">
                        lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
                     </div>
@@ -27,7 +27,7 @@
                 <i class="fas fa-user-tie bg-blue"></i>
                 <div class="timeline-item">
                     <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                    <h3 class="timeline-header"><a href="#">Admin</a> Mengubah data penduduk</h3>
+                    <h3 class="timeline-header"><strong>Admin</strong></h3>
                     <div class="timeline-body">lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet</div>
 
                 </div>
@@ -43,7 +43,7 @@
                 <i class="fa fa-user-tie bg-blue"></i>
                 <div class="timeline-item">
                     <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                    <h3 class="timeline-header"><a href="#">Admin</a> Menambah mengubah data penduduk</h3>
+                    <h3 class="timeline-header"><strong>Admin</strong></h3>
                     <div class="timeline-body">
                         lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
                     </div>

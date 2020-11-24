@@ -176,7 +176,7 @@
     let dataLengkap = false;
     document.getElementById('cekdata').addEventListener('click', function(event) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '<?= $index_location ?>/services/penduduk.php?action=select&nik=' + form['nik'].value);
+        xhr.open('GET', 'services/penduduk.php?action=select&nik=' + form['nik'].value);
         xhr.onload = function() {
             if(xhr.status == 200) {
                 try {
@@ -217,7 +217,7 @@
         event.preventDefault();
         if(dataLengkap) {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', '<?= $index_location ?>/services/pemudik.php?action=insert&nik=' + form['nik'].value);
+            xhr.open('POST', 'services/pemudik.php?action=insert&nik=' + form['nik'].value);
             xhr.onload = function() {
                 if(xhr.status === 200) {
                     try {
@@ -263,7 +263,7 @@
 
     function deletePemudik(nik) {
         const ajax = new XMLHttpRequest();
-        ajax.open('GET', '<?= $index_location ?>/services/pemudik.php?action=delete&nik=' + nik);
+        ajax.open('GET', 'services/pemudik.php?action=delete&nik=' + nik);
         ajax.onload = function() {
             if(ajax.status === 200) {
                 try {
