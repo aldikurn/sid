@@ -25,7 +25,7 @@
             </div>
 
             <div class="card-footer">
-                <form id="form-update-logo" style="display: flex; justify-content: space-between; margin-bottom: 0;">
+                <form id="form-update-logo" style="display: flex; justify-content: space-between; margin-bottom: 0; flex-wrap:wrap; overflow: hidden">
                     <input id="browse-logo" name="logo-desa" type="file" class="btn btn-default" accept="image/*">
                     <button type="submit" id="update-logo" class="btn btn-success">Update logo</button>
                 </form>

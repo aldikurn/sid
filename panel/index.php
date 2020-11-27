@@ -216,7 +216,7 @@ function printSideBarMenu($pages)
 
     <footer class="main-footer">
         <strong>Sistem Informasi Desa</strong><br>
-        Dibuat dengan ❤️+ 🥴 + 🤪 untuk memenuhi praktek industri
+        Dibuat dengan ❤️ + 🤪 untuk memenuhi praktek industri
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0
         </div>

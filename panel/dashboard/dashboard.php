@@ -5,6 +5,11 @@ include_once('services/dashboard.php');
     .info-box-text {
         font-size: 0.8em;
     }
+
+    .cust-tooltip {
+    text-decoration: underline black dotted; 
+    cursor: pointer;
+    }
 </style>
 
 <div class="row">
@@ -133,7 +138,7 @@ include_once('services/dashboard.php');
                             </span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Pasien Dalam Pengawasan</span>
+                                <span class="info-box-text" ><span class="cust-tooltip" data-toggle="tooltip" title="Pasien Dalam Pengawasan">PDP</span></span>
                                 <span class="info-box-number"><?= $covid19_desa['pdp'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
@@ -151,7 +156,7 @@ include_once('services/dashboard.php');
                                 <i class="fas fa-head-side-mask nav-icon"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Orang Dalam Pemantauan</span>
+                                <span class="info-box-text"><span class="cust-tooltip" data-toggle="tooltip" title="Orang Dalam Pemantauan">ODP</span></span>
                                 <span class="info-box-number"><?= $covid19_desa['odp'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
@@ -166,7 +171,7 @@ include_once('services/dashboard.php');
                             </span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Orang Dalam Resiko</span>
+                                <span class="info-box-text"><span class="cust-tooltip" data-toggle="tooltip" title="Orang Dalam Resiko">ODR</span></span>
                                 <span class="info-box-number"><?= $covid19_desa['odr'] ?></span>
                             </div>
                             <!-- /.info-box-content -->
@@ -220,16 +225,19 @@ include_once('services/dashboard.php');
     <!-- /.col -->
 </div>
 
-<script src="../dependencies/plugins/highcharts/jquery-3.1.1.min.js"></script>
 <script src="../dependencies/plugins/highcharts/highcharts.js"></script>
 <script src="../dependencies/plugins/highcharts/modules/data.js"></script>
 
-
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 <script>
     Highcharts.chart('container', {
 
         data: {
-            csvURL: window.location.href + 'services/HighCharts/getStatistikCovid19Indonesia.php',
+            csvURL: window.location.origin + window.location.pathname + 'services/HighCharts/getStatistikCovid19Indonesia.php',
             beforeParse: function (csv) {
                 return csv.replace(/\n\n/g, '\n');
             }

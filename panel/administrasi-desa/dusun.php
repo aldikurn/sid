@@ -277,6 +277,7 @@
     function initDusun() {
         let dt = $('#table-dusun').DataTable({
             "ajax": "services/DataTables/getDusun.php",
+            "scrollX" : true,
             "columns": [{
                 "orderable": false,
                 "defaultContent": ""
@@ -622,6 +623,7 @@
     function initRW() {
         let dt = $('#table-rw').DataTable({
             "ajax": "services/DataTables/getrw.php",
+            "scrollX" : true,
             "columns": [{
                 "orderable": false,
                 "defaultContent": ""
@@ -1026,6 +1028,7 @@
     function initRT() {
         let dt = $('#table-rt').DataTable({
             "ajax": "services/DataTables/getRT.php",
+            "scrollX" : true,
             "columns": [{
                 "orderable": false,
                 "defaultContent": ""

@@ -176,6 +176,7 @@
         }
         let dt = $('#table-anggota-keluarga').DataTable( {
             "ajax": "services/keluarga.php?action=select&nomor_kk=" + nomorKK,
+            "scrollX" : true,
             "columns": [
                 {
                     "orderable": false,

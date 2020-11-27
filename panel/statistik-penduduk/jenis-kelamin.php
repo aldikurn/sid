@@ -57,7 +57,7 @@
             <!-- /.card-header -->
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="overflow: auto">
                         <figure class="highcharts-figure">
                             <div id="container"></div>
                         </figure>
